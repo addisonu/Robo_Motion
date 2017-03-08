@@ -3,6 +3,11 @@
 // DESC: Unit testing template file
 // FILE: unit_test_template.cpp
 
+//NOTE :
+// Instructions for running gtes
+// Check library is known: sudo ldconfig -v | grep gtest
+// Compile with c++: c++ <source_files> -lgtest -lgtest_main -o <output_file>
+
 #include <iostream>
 #include "gtest/gtest.h"
 

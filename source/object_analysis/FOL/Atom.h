@@ -18,20 +18,21 @@ enum class AtomType{
     RELATION,
     CONSTANT,
     OBJECT,
+    NONE,
 };
 
-class Atom{
+struct Atom{
     public:
 
         // CONSTRUCTOR
-        
-    private:
+	//Atom(){ }
+
+	Atom(std::string name_arg, AtomType type_arg): name(name_arg), type(type_arg){ }
 
         // DATA MEMBERS
         std::string name;
         AtomType type;
 };
-
 #endif
 
 
