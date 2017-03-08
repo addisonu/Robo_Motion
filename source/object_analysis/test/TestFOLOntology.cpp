@@ -1,13 +1,13 @@
 // AUTHOR: NA
 // DATE: 02/13/17
-// DESC: Test Ontology class 
+// DESC: Test Ontology class
 // FILE: TestFOLOntology.cpp
 
 #include <iostream>
 #include <vector>
 #include <string>
 #include "gtest/gtest.h"
-#include "../FOL/Ontology.h"
+#include "../KnowledgeBase/Ontology.h"
 
 using namespace ::testing;
 
@@ -16,7 +16,7 @@ class TestFOLOntology : public ::testing::Test{
             virtual void SetUp(){
             }
             virtual void TearDown(){
-            }                                              
+            }
 };
 
 // Tests are detected
