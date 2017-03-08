@@ -32,18 +32,26 @@ class Ontology{
 	void addFunction(Atom function);
 	bool removeFunction(std::string name);
 	std::pair<AtomType, std::set<Atom> > getAllFunction();
+	unsigned priority(ObjectType obj);
+	unsigned robustness(ObjectType obj);
+	unsigned position(Atom constant);
 
 	// PREDICATE
 	void addPredicate(Atom predicate);
 	bool removePredicate(std::string name);
 	std::pair<AtomType, std::set<Atom> > getAllPredicate();
+	bool hasPercept(ObjectType obj);
+	bool hasActuator(ObjectType obj);
 
 	// RELATION
 	void addRelation(Atom predicate);
 	bool removeRelation(std::string name);
 	std::pair<AtomType, std::set<Atom> > getAllRelation();
+	std::set<Atom> isNorth(ObjectType obj);
+	std::set<Atom> isEast(ObjectType obj);
+	std::set<Atom> isSouth(ObjectType obj);
+	std::set<Atom> isWest(ObjectType obj);
 	
-
 	// OBJECT
 	void addObject(Atom object);
 	bool removeObject(std::string name);
@@ -60,7 +68,6 @@ class Ontology{
 	std::pair<AtomType, std::set<Atom> > all_predicate;
 	std::pair<AtomType, std::set<Atom> > all_function;
 	std::pair<AtomType, std::set<Atom> > all_relation;
-	
 };
 
 #endif
