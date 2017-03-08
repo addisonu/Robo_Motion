@@ -7,9 +7,9 @@
 #ifndef FOL_ATOM_H
 #define FOL_ATOM_H
 
-#include<vector>
+#include <vector>
 #include <string>
-#include<iostream>
+#include <iostream>
 
 enum class AtomType{
     FUNCTION = 0,

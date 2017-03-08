@@ -31,27 +31,27 @@ class Ontology{
 	// FUNCTION
 	void addFunction(Atom function);
 	bool removeFunction(std::string name);
-	std::pair<std::set<Atom> > getAllFunction();
+	std::pair<AtomType, std::set<Atom> > getAllFunction();
 
 	// PREDICATE
-	addPredicate(Atom predicate);
-	removePredicate(std::string name);
-	std::pair<std::set<Atom> > getAllPredicate();
+	void addPredicate(Atom predicate);
+	bool removePredicate(std::string name);
+	std::pair<AtomType, std::set<Atom> > getAllPredicate();
 
 	// RELATION
-	addRelation(Atom predicate);
-	removeRelation(std::string name);
-	std::pair<std::set<Atom> > getAllRelation();
+	void addRelation(Atom predicate);
+	bool removeRelation(std::string name);
+	std::pair<AtomType, std::set<Atom> > getAllRelation();
 	
 
 	// OBJECT
-	addObject(Atom object);
-	removeObject(std::string name);
+	void addObject(Atom object);
+	bool removeObject(std::string name);
 	std::pair<AtomType, std::set<Atom> > getAllObject();
 
 	// CONSTANT
-	addConstant(Atom constant);
-	removeConstant(std::string name);
+	void addConstant(Atom constant);
+	bool removeConstant(std::string name);
 	std::pair<AtomType, std::set<Atom> > getAllConstant();
 
 	private:
