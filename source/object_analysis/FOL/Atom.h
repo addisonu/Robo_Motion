@@ -29,7 +29,7 @@ struct Atom{
 
 	Atom(std::string name_arg, AtomType type_arg): name(name_arg), type(type_arg){ }
 
-        bool operator<(Atom rhs)
+        bool operator<(Atom rhs) const
         {
             return name < rhs.name;
         }
