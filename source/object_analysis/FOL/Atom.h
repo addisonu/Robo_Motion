@@ -29,6 +29,11 @@ struct Atom{
 
 	Atom(std::string name_arg, AtomType type_arg): name(name_arg), type(type_arg){ }
 
+        bool operator<(Atom rhs)
+        {
+            return name < rhs.name;
+        }
+
         // DATA MEMBERS
         std::string name;
         AtomType type;
