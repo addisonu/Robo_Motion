@@ -7,6 +7,7 @@
 #include <utility>
 #include <iostream>
 #include "Ontology.h"
+#include "../FOL/Atom.h"
 
         // FUNCTION
 	void Ontology::addFunction(Atom function)
@@ -58,26 +59,95 @@
         {
             return all_predicate;
         }
-/*
-	bool hasPercept(ObjectType obj){}
-	bool hasActuator(ObjectType obj){}
+
+	bool Ontology::hasPercept(ObjectType obj)
+	{
+	    //return obj == ObjectType.AGENT || obj == ObjectType.DYNAMIC_MAMMAL;
+		return true;
+	}
+
+	bool Ontology::hasActuator(ObjectType obj)
+	{
+		//return obj == AGENT || obj == DYNAMIC_MAMMAL;
+		return true;
+	}
 
 	// RELATION
-	void addRelation(Atom predicate){}
-	bool removeRelation(std::string name){}
-	std::pair<AtomType, std::set<Atom> > getAllRelation(){}
-	std::set<Atom> isNorth(ObjectType obj){}
-	std::set<Atom> isEast(ObjectType obj){}
-	std::set<Atom> isSouth(ObjectType obj){}
-	std::set<Atom> isWest(ObjectType obj){}
+	void Ontology::addRelation(Atom relation)
+	{
+            all_relation.second.insert(relation);
+	}
+
+	bool Ontology::removeRelation(std::string name)
+	{
+		return true;	
+	}
+
+	std::pair<AtomType, std::set<Atom> > Ontology::getAllRelation()
+	{
+		return all_relation;
+	}
+
+	std::set<Atom> Ontology::isNorth(ObjectType obj)
+	{
+		//for(auto obj : all_object){
+			// obj.y is above agent.y
+			// add to set	
+		//}
+	}
+
+	std::set<Atom> Ontology::isEast(ObjectType obj)
+	{
+		//for(auto obj : all_object){
+			// obj.y is above agent.y
+			// add to set	
+		//}
+	}
+
+	std::set<Atom> Ontology::isSouth(ObjectType obj)
+	{
+		//for(auto obj : all_object){
+			// obj.y is above agent.y
+			// add to set	
+		//}
+	}
+
+	std::set<Atom> Ontology::isWest(ObjectType obj)
+	{
+		//for(auto obj : all_object){
+			// obj.y is above agent.y
+			// add to set	
+		//}
+	}
 	
 	// OBJECT
-	void addObject(Atom object){}
-	bool removeObject(std::string name){}
-	std::pair<AtomType, std::set<Atom> > getAllObject(){}
+	void Ontology::addObject(Atom object)
+	{
+            all_constant.second.insert(object);
+	}
+
+	bool Ontology::removeObject(std::string name)
+	{
+		return true;
+	}
+
+	std::pair<AtomType, std::set<Atom> > Ontology::getAllObject()
+	{
+		return all_object;
+	}
 
 	// CONSTANT
-	void addConstant(Atom constant){}
-	bool removeConstant(std::string name){}
-	std::pair<AtomType, std::set<Atom> > getAllConstant(){}
-*/
+	void Ontology::addConstant(Atom constant)
+	{
+            all_constant.second.insert(constant);
+	}
+
+	bool Ontology::removeConstant(std::string name)
+	{
+		return true;
+	}
+
+	std::pair<AtomType, std::set<Atom> > Ontology::getAllConstant()
+	{
+		return all_constant;
+	}
