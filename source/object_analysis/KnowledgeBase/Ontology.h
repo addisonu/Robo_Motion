@@ -1,6 +1,6 @@
 // AUTHOR: NA
 // DATE: 03/07/17
-// DESC: Definition of Sentence structure
+// DESC: Definition of knowledge base vocabulary
 // FILE: Ontology.h
 
 #ifndef FOL_ONTOLOGY_H
@@ -8,7 +8,7 @@
 
 #include <set>
 #include <iostream>
-#include "Atom.h"
+#include "../FOL/Atom.h"
 
 enum class ObjectType{
 	AGENT = 0,
@@ -34,7 +34,7 @@ class Ontology{
 	std::pair<AtomType, std::set<Atom> > getAllFunction();
 	unsigned priority(ObjectType obj);
 	unsigned robustness(ObjectType obj);
-	unsigned position(Atom constant);
+        std::pair<int, int> position(Atom constant);
 
 	// PREDICATE
 	void addPredicate(Atom predicate);
