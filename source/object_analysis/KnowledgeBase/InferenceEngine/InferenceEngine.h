@@ -16,9 +16,10 @@ class Inference{
         // CONSTRUCTOR
 
         // MEMBER FUNCTIONS
+        std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb);
         Sentence BackChaining();
-        Sentence ForwardChaining();
-        Unification(Sentence lhs, Sentence rhs)l;
+        std::pair<Sentence, bool> ForwardChaining();
+        Unification(Sentence lhs, Sentence rhs);
 
     private:
 };
