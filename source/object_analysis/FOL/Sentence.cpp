@@ -8,6 +8,31 @@
 #include <string>
 #include "../FOL/Sentence.h"
 
+bool Sentence::operator<(Sentence rhs) const
+{
+    if(sen.size() != rhs.sen.size()){
+        return sen.size() < rhs.sen.size();
+    }
+    //for(unsigned i = 0; i != sen.size(); ++i){
+    auto it = sen.cbegin(), rhs_it = rhs.sen.cbegin();
+    while(it != sen.cend() && rhs_it != rhs.sen.cend() ){
+        if(it->name != rhs_it->name){
+                return it->name < rhs_it->name;
+        }
+        else if(it->type != rhs_it->type){
+            return it->type < rhs_it->type;
+        }
+        ++it;
+        ++rhs_it;
+    }
+    return false;
+}
+
+std::list<Atom> Sentence::getSen()
+{
+    return sen;
+}
+
 void Sentence::addAtom(Atom term, long index)
 {
 	if(index >= sen.size()){
@@ -53,7 +78,7 @@ bool Sentence::isAtomic()
 	if(sen.size() == 1 && sen.begin()->type != AtomType::OPERATOR){
 		return true;
 	}
-	false;
+	return false;
 }
 
 bool Sentence::isComplex()

@@ -18,6 +18,8 @@ class Sentence{
 
 
 	// MEMBER FUNCTIONS
+        bool operator<(Sentence rhs) const;
+        std::list<Atom> getSen();
 	void addAtom(Atom term, long index = std::string::npos);
 	void removeAtom(Atom term, long index = std::string::npos);
 	bool isSentence();
