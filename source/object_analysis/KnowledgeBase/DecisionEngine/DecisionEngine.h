@@ -20,11 +20,11 @@ class DecisionEngine{
 
     // MEMBER FUNCTIONS
     void addHeuristic(Sentence val);
-    void removeHeuristic(unsigned index);
+    bool removeHeuristic(Sentence val);
     std::set<Sentence>  getAllHeuristic();
 
     private:
-        std::set<Sentence> heurisitic;
+        std::set<Sentence> heuristic;
 };
 #endif
 

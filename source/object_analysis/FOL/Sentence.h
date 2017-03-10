@@ -11,8 +11,8 @@
 #include <string>
 #include "../FOL/Atom.h"
 
-class Sentence{
-	public:
+struct Sentence{
+	//public:
 
 	// CONSTRUCTOR
 
@@ -26,7 +26,7 @@ class Sentence{
 	bool isAtomic();
 	bool isComplex();
 
-	private:
+	//private:
 
 	// DATA MEMBERS
 	std::list<Atom> sen;
