@@ -18,7 +18,26 @@ struct Sentence{
 
 
 	// MEMBER FUNCTIONS
-        bool operator<(Sentence rhs) const;
+        bool operator<(Sentence rhs) const
+        {
+            if(sen.size() != rhs.sen.size()){
+                return sen.size() < rhs.sen.size();
+            }
+        //for(unsigned i = 0; i != sen.size(); ++i){
+            auto it = sen.cbegin(), rhs_it = rhs.sen.cbegin();
+            while(it != sen.cend() && rhs_it != rhs.sen.cend() ){
+                if(it->name != rhs_it->name){
+                    return it->name < rhs_it->name;
+                }
+                else if(it->type != rhs_it->type){
+                    return it->type < rhs_it->type;
+                }
+                    ++it;
+                    ++rhs_it;
+            }
+            return false;
+        }
+
         std::list<Atom> getSen();
 	void addAtom(Atom term, long index = std::string::npos);
 	void removeAtom(Atom term, long index = std::string::npos);
