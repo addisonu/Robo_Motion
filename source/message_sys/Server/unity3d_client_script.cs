@@ -1,6 +1,6 @@
 // AUTHOR: AU
 // DATE: 02/15/17
-// DESC: C# script to start unity3d client
+// DESC: C# script to start unity3d message client
 // FILE: unity3d_client_script.cs
 
 using UnityEngine;
