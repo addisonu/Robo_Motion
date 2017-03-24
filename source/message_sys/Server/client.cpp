@@ -39,7 +39,8 @@ bool MessageClient::bindSocket(std::string &msg)
     if(!connect(client, (struct sockaddr*)&server_addr, sizeof(server_addr)) == 0){
         return false;
     }
-    std::stringstream s(portNum);
+    std::stringstream s;
+    s << portNum;
     s << "Connection to the server port number: ";
     msg = s.str();
     std::cout << "=> Awaiting confirmation from the server...";

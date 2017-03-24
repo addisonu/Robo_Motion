@@ -29,6 +29,6 @@ class MessageClient {
         int portNum = 1500;
         bool is_exit = false;
         int bufsize = 1024;
-        char *buffer = nullptr;
+        char *buffer;// = nullptr;
         char *ip;//[] = "127.0.0.1";
 };
