@@ -11,9 +11,22 @@
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "server.h"
+#include <exception>
+#include "../Server/client.h"
 
 int main(int argc, char **argv)
 {
-    return 0;
+	try{
+	std::string msg;
+	MessageClient client;
+	client.openConnection(msg);
+	client.bindSocket(msg);
+	client.doConnection();
+	client.closeConnection(msg);
+	}
+	catch(std::exception &e){
+		std::cout << "There was an unkwon error, program terminating" << std::endl;
+		return 1;
+	}
+    return 0;;
 }
