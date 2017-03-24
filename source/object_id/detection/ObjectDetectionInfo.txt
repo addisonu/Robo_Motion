@@ -1,0 +1,6 @@
+// AUTHOR: NA
+// DATE: 03/23/17
+// DESC: Expalanation about location of object detection programs
+// FILE: ObjectDetectionInfo.txt
+
+There are currently two programs to detect new objects. The first detects static objects and the second detects dynamic objects. These programs were written by client staff and won't be included with this package. At the client's discretion, these files can be added to the client's copy of this package.
