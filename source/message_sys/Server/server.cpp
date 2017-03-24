@@ -49,7 +49,7 @@ bool MessageServer::listenClient(std::string &msg)
     server = accept(client, (struct sockaddr*)&server_addr, &size);
 
     if(server < 0){
-        msg = "Erro accepting client(s)...";
+        msg = "Error accepting client(s)...";
         return false;
     }
     while(server > 0){

@@ -11,9 +11,22 @@
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "server.h"
+#include <exception>
+#include "../Server/server.h"
 
 int main(int argc, char **argv)
 {
+	std::string msg;
+
+	try{
+		MessageServer server;
+		server.openConnection(msg);
+		server.listenClient(msg);
+		server.closeConnection(msg);
+	}
+	catch(std::exception &e){
+		std::cout << "An unknown error occurred. The program will now terminate" << std::endl;
+		return 1;
+	}
     return 0;
 }
