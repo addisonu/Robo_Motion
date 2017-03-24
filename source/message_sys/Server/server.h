@@ -29,5 +29,5 @@ class MessageServer {
         int portNum = 1500;
         bool is_exit = false;
         int bufsize = 1024;
-        char *buffer = nullptr;
+        char *buffer;// = nullptr;
 };
