@@ -1,6 +1,6 @@
 // AUTHOR: NA
 // DATE: 03/09/17
-// DESC: The definition for the inference engine which will entail new sentence from those in the knowledge repo
+// DESC: The definition for the inference engine which will entail new sentences from those in the knowledge repo
 // FILE: Inference.h
 
 #ifndef KNOWLEDGE_BASE_INFERENCE_ENGINE_H
@@ -8,7 +8,8 @@
 
 #include <vector>
 #include <algorithm>
-#include "../FOL/Sentence"
+#include <set>
+#include "../../FOL/Sentence.h"
 
 class Inference{
     public:
@@ -17,9 +18,9 @@ class Inference{
 
         // MEMBER FUNCTIONS
         std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb);
-        Sentence BackChaining();
-        std::pair<Sentence, bool> ForwardChaining();
-        Unification(Sentence lhs, Sentence rhs);
+        Sentence backChaining();
+        std::pair<Sentence, bool> forwardChaining();
+        bool unification(Sentence lhs, Sentence rhs);
 
     private:
 };
