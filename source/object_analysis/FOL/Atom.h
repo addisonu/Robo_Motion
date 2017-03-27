@@ -8,6 +8,7 @@
 #define FOL_ATOM_H
 
 #include <vector>
+#include <sstream>
 #include <string>
 #include <iostream>
 
@@ -17,26 +18,39 @@ enum class AtomType{
     OPERATOR,
     RELATION,
     CONSTANT,
-    OBJECT,
+    OBJECT,// is an identifier or variable
     NONE,
 };
 
 struct Atom{
-    public:
 
-        // CONSTRUCTOR
+	// CONSTRUCTOR
 	//Atom(){ }
 
 	Atom(std::string name_arg, AtomType type_arg): name(name_arg), type(type_arg){ }
 
-        bool operator<(Atom rhs) const
-        {
-            return name < rhs.name;
-        }
+	bool operator<(Atom rhs) const
+	{
+		return name < rhs.name;
+	}
 
-        // DATA MEMBERS
-        std::string name;
-        AtomType type;
+	void incrementObjectName()
+	{
+		// Find first digit of identifier
+		std::stringstream name_dig, name_next_dig;
+		std::size_t first_dig = name.find_first_of("0123456789");
+		name_dig << name.substr(first_dig);
+		long dig;
+		name_dig >> dig ;
+		++dig;
+		name_next_dig << dig;
+		
+		name = name.substr(0, first_dig + 1) + name_next_dig.str();
+	}
+
+	// DATA MEMBERS
+	std::string name;
+	AtomType type;
 };
 #endif
 
