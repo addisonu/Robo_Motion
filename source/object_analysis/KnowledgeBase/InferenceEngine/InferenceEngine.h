@@ -11,15 +11,15 @@
 #include <set>
 #include "../../FOL/Sentence.h"
 
-class Inference{
+class InferenceEngine{
     public:
 
         // CONSTRUCTOR
 
         // MEMBER FUNCTIONS
-        Sentence backChaining();
-        std::pair<Sentence, bool> forwardChaining();
-        std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb);
+        Sentence backChaining(std::set<Sentence> kb);
+        std::pair<Sentence, bool> forwardChaining(std::set<Sentence> kb);
+        std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb, Atom query);
         bool unify(Sentence lhs, Sentence rhs);
 		Sentence standardizeRule(Sentence rule);
 		Sentence subst(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
