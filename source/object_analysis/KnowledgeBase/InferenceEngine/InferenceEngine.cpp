@@ -6,11 +6,6 @@
 #include <algorithm>
 #include "InferenceEngine.h"
 
-std::set<Sentence> InferenceEngine::makeDefiniteClauseKB(std::set<Sentence> kb, Atom query)
-{
-	
-}
-
 Sentence InferenceEngine::backChaining()
 {
 
@@ -36,7 +31,34 @@ std::pair<Sentence, bool> InferenceEngine::forwardChaining()
 	// return false;
 }
 
-bool InferenceEngine::unification(Sentence lhs, Sentence rhs)
+std::set<Sentence> InferenceEngine::makeDefiniteClauseKB(std::set<Sentence> kb, Atom query)
+{
+	
+}
+
+bool InferenceEngine::unify(Sentence lhs, Sentence rhs)
 {
 
 }
+
+Sentence InferenceEngine::subst(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
+{
+
+}
+
+Sentence InferenceEngine::universalInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
+{
+
+}
+
+Sentence InferenceEngine::existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
+{
+
+}
+
+Sentence InferenceEngine::standardizeRule(Sentence rule)
+{
+
+}
+
+

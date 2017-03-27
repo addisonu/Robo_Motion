@@ -17,11 +17,14 @@ class Inference{
         // CONSTRUCTOR
 
         // MEMBER FUNCTIONS
-        std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb);
         Sentence backChaining();
         std::pair<Sentence, bool> forwardChaining();
-        bool unification(Sentence lhs, Sentence rhs);
-
+        std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb);
+        bool unify(Sentence lhs, Sentence rhs);
+		Sentence standardizeRule(Sentence rule);
+		Sentence subst(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
+		Sentence universalInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
+		Sentence existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
     private:
 };
 #endif
