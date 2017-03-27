@@ -38,7 +38,27 @@ struct Sentence{
             return false;
         }
 
-        std::list<Atom> getSen();
+	std::list<Atom>::iterator begin()
+	{
+		return sen.begin();
+	}
+
+	std::list<Atom>::const_iterator cbegin()
+	{
+		return sen.cbegin();
+	}
+
+	std::list<Atom>::iterator end()
+	{
+		return sen.end();
+	}
+
+	std::list<Atom>::const_iterator cend()
+	{
+		return sen.cend();
+	}
+
+	std::list<Atom> getSen();
 	void addAtom(Atom term, long index = std::string::npos);
 	void removeAtom(Atom term, long index = std::string::npos);
 	bool isSentence();
