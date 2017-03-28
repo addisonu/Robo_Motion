@@ -22,10 +22,13 @@ class InferenceEngine{
         std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb, Atom query);
         bool unify(Sentence lhs, Sentence rhs);
 		Sentence standardizeRule(Sentence rule);
-		Sentence subst(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
+		bool substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index);
 		Sentence universalInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
 		Sentence existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
+
     private:
+		
+		std::set<Sentence> kb;
 };
 #endif
 

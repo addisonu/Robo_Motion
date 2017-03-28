@@ -1,9 +1,11 @@
+// AUTHOR: NA
 // DATE: 03/25/17
 // DESC: The implementation for the inference engine which will entail new sentences from those in the knowledge repo
 // FILE: Inference.cpp
 
 #include <vector>
 #include <set>
+#include <utility>
 #include <algorithm>
 #include "InferenceEngine.h"
 #include "../../FOL/Sentence.h"
@@ -47,10 +49,45 @@ bool InferenceEngine::unify(Sentence lhs, Sentence rhs)
 	return true;
 }
 
-Sentence InferenceEngine::subst(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
+bool InferenceEngine::substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index)
 {
-	Sentence s;
-	return s;
+	// Check argument types
+	if(alpha.arity < arg_index/*theta.first.AtomType != AtomType::OBJECT && theta.second.AtomType != AtomType::VARIABLE*/){
+		return false;
+	}
+	// Check all sentences in knowledge base for match
+	for(auto fact : kb){
+		for(auto part : fact){
+			if(part.type == alpha.type && part.name == alpha.name){
+				switch(alpha.type){
+					case AtomType::OBJECT:
+					{
+						Atom first("x", AtomType::OBJECT);
+						// increment variable
+						Atom second(part);
+						theta.insert(std::make_pair(first, second));
+						break;
+					}
+					case AtomType::PREDICATE:
+					{
+						// arity == 1
+						//alpha.arg[arg_index] = 
+					}
+					case AtomType::FUNCTION:
+					{
+
+					}
+					default:
+					{
+						// do nothing
+					}
+				}
+			}
+		}
+	}
+
+	
+	return theta.size();
 
 }
 
@@ -84,4 +121,5 @@ Sentence InferenceEngine::standardizeRule(Sentence rule)
 			all_obj_name.push_back(atom_obj.name);
 		}
 	}
+	return rule;
 }
