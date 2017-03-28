@@ -19,6 +19,8 @@ enum class AtomType{
     RELATION,
     CONSTANT,
     OBJECT,// is an identifier or variable
+	LHS_PAREN,
+	RHS_PAREN,
     NONE,
 };
 
@@ -51,6 +53,16 @@ struct Atom{
 	// DATA MEMBERS
 	std::string name;
 	AtomType type;
+
+};
+
+struct ComplexAtom : public Atom{
+	
+	// CONSTRUCTOR
+	
+	// DATA MEMBERS
+	std::vector<Atom> arg;
+	unsigned arity;
 };
 #endif
 
