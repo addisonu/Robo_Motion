@@ -22,10 +22,9 @@ bool DecisionEngine::removeHeuristic(Sentence val)
     auto it = heuristic.begin();
     while(it != heuristic.end()){
         if(it->sen.size() == val.sen.size()){
-            /*std::list<Atom>::iterator*/ auto it_sen = it->sen.begin();
+            auto it_sen = it->sen.begin();
             auto val_sen = val.sen.begin();
             while(it_sen != it->sen.end() || val_sen != val.sen.end()){
-            //for(unsigned i =  0; i != val.sen.size(); ++i){
                 if(it_sen->type != val_sen->type || it_sen->name == val_sen->name){
                     same = false;
                     break;
