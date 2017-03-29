@@ -58,37 +58,21 @@ bool InferenceEngine::substitution(std::set<std::pair<Atom, Atom> > &theta, Comp
 	// Check all sentences in knowledge base for match
 	for(auto fact : kb){
 		for(auto part : fact){
-			if(part.type == alpha.type && part.name == alpha.name){
-				switch(alpha.type){
-					case AtomType::OBJECT:
-					{
-						Atom first("x", AtomType::OBJECT);
-						// increment variable
-						Atom second(part);
-						theta.insert(std::make_pair(first, second));
-						break;
-					}
-					case AtomType::PREDICATE:
-					{
-						// arity == 1
-						//alpha.arg[arg_index] = 
-					}
-					case AtomType::FUNCTION:
-					{
-
-					}
-					default:
-					{
-						// do nothing
-					}
+			if((alpha.type == AtomType::OBJECT || alpha.type == AtomType::PREDICATE || alpha.type == AtomType::FUNCTION) && part.type == alpha.type && part.name == alpha.name){
+				
+				Atom first("x", AtomType::OBJECT);
+				
+				if(theta.size() > 0){
+					first.name = theta.rend()->first.name;
+					first.incrementObjectName();
 				}
+				Atom second(part);
+				theta.insert(std::make_pair(first, second));
 			}
 		}
 	}
-
 	
 	return theta.size();
-
 }
 
 Sentence InferenceEngine::universalInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
