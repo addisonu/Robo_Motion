@@ -17,14 +17,17 @@ class DecisionEngine{
     public:
 
     // CONSTRUCTOR
+	DecisionEngine(std::string path_to_heuristic);
 
     // MEMBER FUNCTIONS
     void addHeuristic(Sentence val);
     bool removeHeuristic(Sentence val);
-    std::set<Sentence>  getAllHeuristic();
+    std::set<Sentence> getAllHeuristic();
+	bool writeToKB();
 
     private:
         std::set<Sentence> heuristic;
+		std::string path_to_heuristic; 
 };
 #endif
 

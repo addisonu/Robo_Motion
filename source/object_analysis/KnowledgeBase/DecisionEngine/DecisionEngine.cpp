@@ -7,9 +7,31 @@
 #include <set>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "../../FOL/Sentence.h"
 #include "../../FOL/Atom.h"
 #include "DecisionEngine.h"
+
+DecisionEngine::DecisionEngine(std::string path_to_heuristic_arg): path_to_heuristic(path_to_heuristic_arg)
+{
+	// Load heuristics from file
+	try{
+		std::ifstream ifs;
+		ifs.open(path_to_heuristic, std::ifstream::in);
+		if(ifs.is_open()){
+			char crule[500];
+			while(ifs.good()){
+				ifs.getline(crule, 500);
+				Sentence rule;
+				rule.sen.push_back(Atom(std::string(crule), AtomType::NONE));			
+				heuristic.insert(rule);
+			}
+		}
+	}
+	catch(std::exception &e){
+		std::cerr << "An error occurred: " << e.what() << std::endl;
+	}
+}
 
 void DecisionEngine::addHeuristic(Sentence val)
 {
@@ -44,3 +66,18 @@ std::set<Sentence>  DecisionEngine::getAllHeuristic()
     return heuristic;
 }
 
+bool DecisionEngine::writeToKB()
+{
+	std::ofstream ofs;
+	ofs.open(path_to_heuristic, std::ofstream::out);
+	
+	try{
+		if(ofs.open()){
+
+		}
+	}
+	catch(std::excepton &e){
+		std::cerr << "An error occurred: " << e.what() << std::endl;
+	}	
+}
+	
