@@ -16,10 +16,14 @@
 DecisionEngine::DecisionEngine(std::string path_to_heuristic_arg): path_to_heuristic(path_to_heuristic_arg)
 {
 	// Load heuristics from file
+	// Catch any exception thrown when file is opened
 	try{
+		// open knowledge base file
 		std::ifstream ifs;
 		ifs.open(path_to_heuristic, std::ifstream::in);
 		if(ifs.is_open()){
+
+			// create a buffer, convert each string to a sentence and add to heuristic
 			char crule[500];
 			while(ifs.good()){
 				ifs.getline(crule, 500);
@@ -41,12 +45,16 @@ void DecisionEngine::addHeuristic(Sentence val)
 
 bool DecisionEngine::removeHeuristic(Sentence val)
 {
-    bool same = true;
     auto it = heuristic.begin();
+
+	// search for fact to remove
     while(it != heuristic.end()){
+		bool same = true;
         if(it->sen.size() == val.sen.size()){
             auto it_sen = it->sen.begin();
             auto val_sen = val.sen.begin();
+
+			// if the attributes e.g. size are different continue
             while(it_sen != it->sen.end() || val_sen != val.sen.end()){
                 if(it_sen->type != val_sen->type || it_sen->name == val_sen->name){
                     same = false;
@@ -69,10 +77,15 @@ std::set<Sentence>  DecisionEngine::getAllHeuristic()
 
 bool DecisionEngine::writeToKB()
 {
+	// Catch any exception thrown when file is opened
 	try{
 		std::ofstream ofs;
+
+		// open file passed as argument to constructor
 		ofs.open(path_to_heuristic, std::ios::out | std::ios::app);
 		if(ofs.is_open()){
+
+			// iterate through sentences held in structure and write to file
 			auto heur_it = heuristic.begin();
 			while(heur_it++ != heuristic.end()){	
 				for(auto term : heur_it->sen){
