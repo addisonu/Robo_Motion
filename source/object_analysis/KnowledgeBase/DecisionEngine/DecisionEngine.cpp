@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <exception>
 #include "../../FOL/Sentence.h"
 #include "../../FOL/Atom.h"
 #include "DecisionEngine.h"
@@ -68,15 +69,19 @@ std::set<Sentence>  DecisionEngine::getAllHeuristic()
 
 bool DecisionEngine::writeToKB()
 {
-	std::ofstream ofs;
-	ofs.open(path_to_heuristic, std::ofstream::out);
-	
 	try{
-		if(ofs.open()){
-
-		}
+		std::ofstream ofs;
+		ofs.open(path_to_heuristic, std::ios::out | std::ios::app);
+		if(ofs.is_open()){
+			auto heur_it = heuristic.begin();
+			while(heur_it++ != heuristic.end()){	
+				for(auto term : heur_it->sen){
+					ofs << term.name << '\n';
+					}
+				}
+			}
 	}
-	catch(std::excepton &e){
+	catch(std::exception &e){
 		std::cerr << "An error occurred: " << e.what() << std::endl;
 	}	
 }
