@@ -1,0 +1,3 @@
+test_object0|"../classification/test0_classifier.xml"
+test_object1|"../classification/test1_classifier.xml"
+vehicle|"../classification/vehicle_classifier.xml"
