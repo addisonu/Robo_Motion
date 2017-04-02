@@ -47,11 +47,11 @@ int main(int argc, char **argv)
                 }
 
 		// Dectect objects
-                for(auto classifier : all_classifier){
+                for(auto classifier_ele : all_classifier){
                     std::vector<cv::Rect> all_object;
-		    classifier.detectMultiScale(img, all_object, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
+		    classifier_ele.second.detectMultiScale(img, all_object, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
                     if(all_object.size() > 0){
-                        return all_classifier.first;
+                        return classifier_ele.first;
                     }
                 }
 	}
