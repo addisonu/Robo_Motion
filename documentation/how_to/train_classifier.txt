@@ -1,0 +1,13 @@
+// AUTHOR: NA
+// DATE: 04/02/17
+// DESC: Description of classifier training process
+// FILE: train_classifier.txt
+
+Intro:
+
+To train a classifier the OpenCV API can be used. Images can be used to help the classifier detect the object it is trained to recognize.
+
+Requirements:
+- OpenCV installation
+- Set of negative images - images that don't contain target object with count > 100
+- Set of positive images - image that contain the target object with count > 1000

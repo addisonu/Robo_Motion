@@ -1,0 +1,4 @@
+// AUTHOR: NA
+// DATE: 04/02/17
+// DESC: Instructions for building project
+// FILE: project_setup.txt

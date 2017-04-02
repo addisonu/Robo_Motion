@@ -1,0 +1,4 @@
+// AUTHOR: NA
+// DATE: 04/02/17
+// DESC: Generate and view project documentation
+// FILE: generate_project_info.txt
