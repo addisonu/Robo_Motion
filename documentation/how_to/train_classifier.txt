@@ -8,6 +8,13 @@ Intro:
 To train a classifier the OpenCV API can be used. Images can be used to help the classifier detect the object it is trained to recognize.
 
 Requirements:
+
 - OpenCV installation
-- Set of negative images - images that don't contain target object with count > 100
-- Set of positive images - image that contain the target object with count > 1000
+- Set of negative png images - images that don't contain target object with count > 100
+- Set of positive png images - image that contain the target object with count > 1000
+
+Tutorial:
+
+Follow tutorial here:
+http://docs.opencv.org/2.4.13.2/doc/user_guide/ug_traincascade.html
+
