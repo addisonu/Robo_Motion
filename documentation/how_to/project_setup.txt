@@ -1,4 +1,273 @@
-// AUTHOR: NA
-// DATE: 04/02/17
-// DESC: Instructions for building project
-// FILE: project_setup.txt
+AUTHOR: NA
+FILE: project_setup.txt
+DATE: 08/04/16
+DESC: Description of project and instructions for building it with cmake
+
+About : This is a program to detect when a new object enters into a computer's field of vision. The technique used is two frame difference and uses OpenCV and CUDA among other libraries.
+
+Documentation : This program uses Doxygen documentation. The comments are already in the source files and the html document will be generated when the cmake.sh file is run. To view the file, open a web browser and enter the path to the index file into the address bar. To find the path, in a shell, navigate to the <root project folder>/default/source/html. Use the command pwd, to get the full path. Append '/index.html' to this path, and this will be what you paste in the web browser address bar.
+
+If your system doesn't have doxygen, follow the instructions on this page http://www.stack.nl/~dimitri/doxygen/download.html to get the version for your platform.
+
+Build :
+
+- Requirements -
+* Cmake version >= 3.2.0
+* Doxygen
+* IDE or command line tools C++ compilier
+
+To build the project, create a root project directory, create a subdirectory named "default". Clone the repo into the default folder. Move the cmake.sh and setenv.sh files from the default directory to the root project directory. Run the cmake.sh file with the command for linux or mac computers:
+./cmake.sh
+
+for windows computers:
+from file explorer double click the file
+
+
+Setting up libs for mac
+- most use otool and install_name_tool
+- use otool to check the path where a lib is being search for
+example :
+input - otool -L a.out
+output -
+/home/boost_1_61_0/stage/lib/libboost_filesystem.dylib (compatibility version 0.0.0, current version 0.0.0)
+/home/boost_1_61_0/stage/lib/libboost_system.dylib (compatibility version 0.0.0, current version 0.0.0)
+/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 28.4.0)
+/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 159.1.0)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+LINUX BUILD STEPS
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SOFTWARE REQUIREMENTS:
+
+- Boost (platform independent general purpose C++ library)
+- Cmake (platform independent automation of project setup)
+- OpenCV (computer vision C++ library)
+- Doxygen (automate presentation and configuration of project documentation)
+- (Reasearch good compilier)
+- GNU-Prolog (prolog interpreter with c interface and compiles to native code)
+- Swi-Prolog (prolog interpreter with c++ interface)
+
+ACQUIRING SOFTWARE REQUIREMENTS:
+
+// OpenCV //
+
+Follow installation guid from: https://help.ubuntu.com/community/OpenCV
+
+// All //
+
+1. Start bash shell
+2. Enter commands :
+sudo apt-get update
+sudo apt-get install libboost-all-dev
+sudo apt-get install cmake
+sudo apt-get install doxygen
+sudo apt-get install gprolog
+sudo apt-get install swi-prolog
+
+ACQUIRE AND BUILD PROJECT
+
+1. Get project files from client
+2. Open bash shell and in home directory create directories:
+Proj_Dir/
+Proj_Dir/TwoFrameDifference/
+Proj_Dir/TwoFrameDifference/default/
+Proj_Dir/TwoFrameDifference/build/
+3. Clone the project repo into default/ and optionally create bookmark
+4. Move files setenv.sh and cmake.sh from default/ to TwoFrameDifference/
+5. Enter command : chmod +x cmake.sh
+6. Enter command : chmode +x setenv.sh
+7. Enter command : ./cmake.sh (this will set environmental variables and run cmake creating project in build/)
+
+VIEW DOCUMENTATION
+
+1. After running cmake.sh file
+2. Enter path Proj_Dir/TwoFrameDifference/build/html/index.html into address bar of browser
+3. Internet connection isn't required and documentation will be viewable as html document
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+MAC BUILD STEPS
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SOFTWARE REQUIREMENTS:
+
+- Homebrew (easily install packages and software)
+- Boost (platform independent general purpose C++ library)
+- Cmake (platform independent automation of project setup)
+- OpenCV (computer vision C++ library)
+- Doxygen (automate presentation and configuration of project documentation)
+- Xcode (Mac C++ IDE and compilier)
+
+ACQUIRING SOFTWARE REQUIREMENTS:
+
+// Homebrew //
+
+1. Navigate to the URL => http://brew.sh
+2. Follow install instructions
+
+// Boost //
+
+1. Open Terminal
+2. Enter command : homebrew install boost
+
+// Cmake //
+
+1. Open Terminal
+2. Enter command : homebrew install cmake
+
+// OpenCV //
+
+1. Open Terminal
+2. Enter command : homebrew instal opencv3
+
+// Doxygen //
+
+1. Open Terminal
+2. Enter command : homebrew intal doxygen
+
+// Xcode //
+
+Itunes path
+1. If downloading most recent version for new OS go to iTunes
+2. Search "Xcode"
+3. Follow instructions to download
+4. Follow instructions to install
+
+Apple website path
+1. If downloading older version of Xcode
+2. Navigate to URL => https://developer.apple.com/download/more/ NOTE : Apple ID required
+3. Select version of Xcode to download
+4. Follow instructions to download
+5. Follow instructions to install
+6a. Launch Xcode
+6b. Open Preferences -> Downloads -> Components tab -> locate "Command Line Tools" in list -> click Install
+7a. Alternatively, open terminal and enter command : xcode-select --install and follow prompts
+
+ACQUIRE AND BUILD PROJECT
+
+1. Get project files from client
+2. add /opt/local to /etc/paths
+3. Open terminal and in home directory create directories:
+Proj_Dir/
+Proj_Dir/TwoFrameDifference/
+Proj_Dir/TwoFrameDifference/default/
+Proj_Dir/TwoFrameDifference/build/
+4. Clone the project repo into default/ and optionally create bookmark
+5. Move files setenv.sh and cmake.sh from default/ to TwoFrameDifference/
+6. Enter command : chmod +x cmake.sh
+7. Enter command : chmode +x setenv.sh
+8. Enter command : ./cmake.sh (this will set environmental variables and run cmake creating project in build/)
+
+VIEW DOCUMENTATION
+
+1. After running cmake.sh file
+2. Enter path Proj_Dir/TwoFrameDifference/build/html/index.html into address bar of browser
+3. Internet connection isn't required and documentation will be viewable as html document
+
+TROUBLE SHOOTING
+
+Problem : Homebrew dosen't have formula for a software requirement
+Possible solution :
+1. Enter command : homebrew update
+2. Enter command : homebrew install <package_name>
+
+Problem : When compiling program, error message "Image not found" is given
+Possible solution : Compiling from Xcode
+1. Project Navigator -> Select project -> Build Phases tab -> select executable target -> Editor menu -> Add Build Phase -> Add Link Binary with Libraries Build Phase
+2. Build Phases tab -> select Link Binary with Libraries dropdown -> select "+"
+3. Add Other -> navigate to library -> Open
+4. Project Navigator -> Find and drag .a or .dylib file into Link Binary with Libraries box
+5. Build Settings tab -> Header Search Paths -> double-click line edit to the right -> click "+" in pop-up dialogue
+6. Add path to framework headers
+7. Build Settings tab -> Library Search Paths -> double-click line edit to the right -> click "+" in pop-up dialogue
+8. Add path to framework libs
+
+Possible solution : Compiling from Terminal
+1. Open Terminal
+2. Navigate to folder containing executable
+3. Enter command : otool -L <executable_file>
+Sample Output :
+
+<executable_file>:
+@rpath/libboost_filesystem.dylib (compatibility version 0.0.0, current version 0.0.0)
+@rpath/libboost_system.dylib (compatibility version 0.0.0, current version 0.0.0)
+/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 28.4.0)
+/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 159.1.0
+
+*4. For each .dylib file in actual output beginning with @rpath or @executablepath or @ (double check)
+5. Enter command : install_name_tool -rpath @rpath/<lib> <absolute_path_to_lib>
+6. To verify rpaths are correct enter command : otool -L <executable_file>
+7. Paths entered in step 5 should be displayed in output
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+WINDOWS BUILD STEPS
+
+SOFTWARE REQUIREMENTS:
+- Boost (platform independent general purpose C++ library)
+- Cmake (platform independent automation of project setup)
+- OpenCV (computer vision C++ library)
+- Doxygen (automate presentation and configuration of project documentation)
+- Microsoft Visual C++ 2015 (C++ compilier)
+- Cygwin (Linux like bash shell)
+
+ACQUIRING SOFTWARE REQUIREMENTS:
+
+// Boost //
+
+Get boost source code at:
+http://www.boost.org/users/download/
+
+Follow install instructions from:
+http://www.boost.org/doc/libs/1_63_0/more/getting_started/windows.html
+
+// Cmake //
+
+Get cmake binaries at:
+https://cmake.org/download/
+
+// OpenCV //
+
+Get opencv binaries at:
+https://sourceforge.net/projects/opencvlibrary/files/opencv-win/
+
+Follow install instructions from:
+http://docs.opencv.org/2.4/doc/tutorials/introduction/windows_install/windows_install.html#windows-install-prebuild
+
+// Doxygen //
+
+Get doxygen binaries from:
+http://www.stack.nl/~dimitri/doxygen/download.html
+
+// Microsoft Visual C++ //
+
+Follow install instructions from:
+https://msdn.microsoft.com/en-us/library/e2h7fzkw.aspx
+
+// Cygwin //
+
+Get cygwin binaries from:
+https://cygwin.com/install.html
+
+ACQUIRE AND BUILD PROJECT
+
+1. Get project files from client
+2. Open Cygwin and in home directory create directories:
+Proj_Dir/
+Proj_Dir/TwoFrameDifference/
+Proj_Dir/TwoFrameDifference/default/
+Proj_Dir/TwoFrameDifference/build/
+3. Clone the project repo into default/ and optionally create bookmark
+4. Move files setenv.sh and cmake.sh from default/ to TwoFrameDifference/
+5. Enter command : chmod +x cmake.sh
+6. Enter command : chmode +x setenv.sh
+7. Enter command : ./cmake.sh (this will set environmental variables and run cmake creating project in build/)
+
+VIEW DOCUMENTATION
+
+1. After running cmake.sh file
+2. Enter path Proj_Dir/TwoFrameDifference/build/html/index.html into address bar of browser
+3. Internet connection isn't required and documentation will be viewable as html document
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
