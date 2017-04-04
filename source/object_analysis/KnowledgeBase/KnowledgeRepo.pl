@@ -20,58 +20,70 @@ staticState(Y); dynamicState(Y).
 dynamicState(Y); staticState(Y).
 
 %% Objects can start moving
-changeState(Y)
+changeState(Y, startMove).
 
 %% Objects can stop moving
-
+changeState(Y, stopMove).
 
 %% Objects can move at can move in 3 space
-
+movePlane(x, y, z).
 
 %% Objects can move in 360 degrees on each plane
-
+moveAngle(0, 360).
 
 %% Objects can contort their shape
-
-
-%% Objects can be static
-
-%% Objects can be dynamic
+dimension(Y, Xplane, Yplane, Zplane).
 
 %% Some objects are organic
-
+organic(Y).
 
 %% Some objects are inorganic
+inorganic(Y).
 
 %% Some objects are synthetic
+synthetic(Y).
 
 %% Some objects are natural
+natural(Y).
 
 %% Some organic objects are mammals
+organic(X):- mammal(Y).
 
 %% Some mammals are humans
-
-
+mammal(Y):- human(Y).
 
 %% Objects may have a rational course
+rationalMove(Y).
 
 %% Objects may move irratically
+irrationalMove(Y).
 
 %% Objects may be moved by external forces
+move(Y):- externalForce(Y); internalForce(Y).
 
 %% Object location may be fixed by external forces
+still(Y):- externalForce(Y).
 
 %% Objects may have movement that follows known patterns
+predictableMove(Y).
 
 %% Object may have movenment that doesn't follow known patterns
-
+unpredictableMove(Y).
 
 %% 10 is the highest priority
+highestPriority(Y):- priority(Y, 10).
 
 %% 1 is the lowest priority
+lowestPriority(Y):- priority(Y, 1).
+
+%% 5 is moderate priority
+moderatePriority(Y):- priority(Y, 5).
 
 %% A human object as priority 10
+highestPriority(Y):- human(Y).
 
 %% Some synthetic objects have priority 10
+synthetic(Y):- highestPriority(Y); priority(Y, Z).
 
 %% Active moving objects have priority greater than 5
+moderatePriority(Y):- dynamic(Y).
