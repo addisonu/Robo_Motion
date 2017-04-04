@@ -10,15 +10,23 @@
 #include "../FOL/Atom.h"
 
         // FUNCTION
+        // add a function to set of all functions
 	void Ontology::addFunction(Atom function)
         {
             all_function.second.insert(function);
         }
 
+        // remove function from set of all functions
 	bool Ontology::removeFunction(std::string name)
         {
-            return true;
-            //return all_function.second.end() == all_function.second.erase(all_function.second.find(name));
+            auto function_it = all_function.second.begin();
+            while(function_it != all_function.second.end()){
+                if(function_it->name == name){
+                    all_function.second.erase(function_it);
+                    return function_it != all_function.second.end();
+                }
+            }
+            return false;
         }
 
 	std::pair<AtomType, std::set<Atom> > Ontology::getAllFunction()
@@ -28,7 +36,48 @@
 
 	unsigned Ontology::priority(ObjectType obj)
         {
-            // return ObjectType
+            switch(obj){
+                case ObjectType::AGENT:
+                    {
+                        return 7;
+                    }
+                case ObjectType::DYNAMIC_MAMMAL:
+                    {
+                        return 9;
+                    }
+                case ObjectType::STATIC_MAMMAL:
+                    {
+                        return 9;
+                    }
+                case ObjectType::DYNAMIC_PLANT:
+                    {
+                        return 7;
+                    }
+                case ObjectType::STATIC_PLANT:
+                    {
+                        return 7;
+                    }
+                case ObjectType::DYNAMIC_INORGANIC_NATURAL:
+                    {
+                        return 6;
+                    }
+                case ObjectType::STATIC_INORGANIC_NATURAL:
+                    {
+                        return 7;
+                    }
+                case ObjectType::DYNAMIC_SYNTHETIC:
+                    {
+                        return 4;
+                    }
+                case ObjectType::STATIC_SYNTHETIC:
+                    {
+                        return 5;
+                    }
+                default:
+                    {
+                        return 0;
+                    }
+            }
             return 0;
         }
 
