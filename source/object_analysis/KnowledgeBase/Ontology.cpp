@@ -159,16 +159,29 @@
             return all_predicate;
         }
 
+        // return true is the object perceives it's environment, false otherwise
 	bool Ontology::hasPercept(ObjectType obj)
 	{
-	    //return obj == ObjectType.AGENT || obj == ObjectType.DYNAMIC_MAMMAL;
+	    if(obj == ObjectType::AGENT
+                    || obj == ObjectType::DYNAMIC_MAMMAL
+                    || obj == ObjectType::STATIC_MAMMAL
+                    || obj == ObjectType::DYNAMIC_INORGANIC_NATURAL
+                    ||obj == ObjectType::DYNAMIC_SYNTHETIC){
 		return true;
+            }
+            return false;
 	}
 
 	bool Ontology::hasActuator(ObjectType obj)
 	{
-		//return obj == AGENT || obj == DYNAMIC_MAMMAL;
+	if(obj == ObjectType::AGENT
+                    || obj == ObjectType::DYNAMIC_MAMMAL
+                    || obj == ObjectType::DYNAMIC_PLANT
+                    || obj == ObjectType::DYNAMIC_INORGANIC_NATURAL
+                    ||obj == ObjectType::DYNAMIC_SYNTHETIC){
 		return true;
+            }
+            return false;
 	}
 
 	// RELATION
