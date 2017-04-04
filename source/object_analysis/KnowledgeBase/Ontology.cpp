@@ -306,7 +306,14 @@
 
 	bool Ontology::removeConstant(std::string name)
 	{
-		return true;
+            auto constant_it = all_constant.second.begin();
+            while(constant_it != all_constant.second.end()){
+                if(constant_it->name == name){
+                    all_constant.second.erase(constant_it);
+                    return constant_it != all_constant.second.end();
+                }
+            }
+            return false;
 	}
 
 	std::pair<AtomType, std::set<Atom> > Ontology::getAllConstant()
