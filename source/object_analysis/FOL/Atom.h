@@ -19,8 +19,8 @@ enum class AtomType{
     RELATION,
     CONSTANT,
     OBJECT,// is an identifier or variable
-	LHS_PAREN,
-	RHS_PAREN,
+    LHS_PAREN,
+    RHS_PAREN,
     NONE,
 };
 
