@@ -1,0 +1,37 @@
+// AUTHOR: NA
+// DATE: 04/02/17
+// DESC: Summary of program and instructions for running
+// FILE: run_project.txt
+
+Name:
+
+    Robo_Motion -- provide client robot with movement recommendations
+
+Description:
+
+    This program runs while the client robot is also active. It reads image files placed in the specified directory and writes agent actions to the specified file.
+
+Arguments:
+
+    - out_file
+        File where actions are written
+
+    - in_file
+        Directory where camera feed is stored
+
+    - kb
+        Prolog file storing environmental axioms
+
+    - rule
+        Prolog file storing decision heuristics
+
+    - classifier
+        Directory containing all classifier not part of OpenCV install
+
+    - classifier_list
+
+Run Project
+    The program will be compiled into an executable.
+    Command to run:
+
+    Robo_Motion -out_file<path_to_action_file> -in_file<path_to_camera_feed> -kb<path_to_kb> -rule<path_to_heuristics> -classifier<path_to_classifier_dir> -classifier_path<path_to_classifier_file_listing>
