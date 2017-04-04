@@ -130,8 +130,16 @@
             return 0;
         }
 
-        // REMOVE
-        std::pair<int, int> Ontology::position(Atom constant)
+        // FIX
+        // sets position of constant object in Euclidean plane
+        void Ontology::setPosition(Atom object, int x_coor, int y_coor)
+        {
+            std::make_pair(x_coor, y_coor);
+        }
+
+        // FIX
+        // returns position of object
+        std::pair<int, int> Ontology::getPosition(Atom object)
         {
             return std::make_pair(0, 0);
         }
@@ -207,36 +215,64 @@
 		return all_relation;
 	}
 
-	std::set<Atom> Ontology::isNorth(ObjectType obj)
+        // return a set of all tracked objects that are north of argument object
+	std::set<Atom> Ontology::isNorth(Atom obj, std::set<Atom> all_obj)
 	{
-		//for(auto obj : all_object){
-			// obj.y is above agent.y
-			// add to set	
-		//}
+	        auto obj_pos = getPosition(obj);
+                std::set<Atom> all_north_obj;
+
+                for(auto track_obj : all_obj){
+                    auto track_pos = getPosition(track_obj);
+                    if(track_pos.first > obj_pos.first){
+                        all_north_obj.insert(track_obj);
+                    }
+                }
+                return all_north_obj;
 	}
 
-	std::set<Atom> Ontology::isEast(ObjectType obj)
+	// return a set of all tracked objects that are east of argument object
+	std::set<Atom> Ontology::isEast(Atom obj, std::set<Atom> all_obj)
 	{
-		//for(auto obj : all_object){
-			// obj.y is above agent.y
-			// add to set	
-		//}
+	        auto obj_pos = getPosition(obj);
+                std::set<Atom> all_east_obj;
+
+                for(auto track_obj : all_obj){
+                    auto track_pos = getPosition(track_obj);
+                    if(track_pos.first > obj_pos.first){
+                        all_east_obj.insert(track_obj);
+                    }
+                }
+                return all_east_obj;
 	}
 
-	std::set<Atom> Ontology::isSouth(ObjectType obj)
+	// return a set of all tracked objects that are south of argument object
+	std::set<Atom> Ontology::isSouth(Atom obj, std::set<Atom> all_obj)
 	{
-		//for(auto obj : all_object){
-			// obj.y is above agent.y
-			// add to set	
-		//}
+	        auto obj_pos = getPosition(obj);
+                std::set<Atom> all_south_obj;
+
+                for(auto track_obj : all_obj){
+                    auto track_pos = getPosition(track_obj);
+                    if(track_pos.first > obj_pos.first){
+                        all_south_obj.insert(track_obj);
+                    }
+                }
+                return all_south_obj;
 	}
 
-	std::set<Atom> Ontology::isWest(ObjectType obj)
+	// return a set of all tracked objects that are west of argument object
+	std::set<Atom> Ontology::isWest(Atom obj, std::set<Atom> all_obj)
 	{
-		//for(auto obj : all_object){
-			// obj.y is above agent.y
-			// add to set	
-		//}
+	        auto obj_pos = getPosition(obj);
+                std::set<Atom> all_west_obj;
+
+                for(auto track_obj : all_obj){
+                    auto track_pos = getPosition(track_obj);
+                    if(track_pos.first > obj_pos.first){
+                        all_west_obj.insert(track_obj);
+                    }
+                }
+                return all_west_obj;
 	}
 	
 	// OBJECT
