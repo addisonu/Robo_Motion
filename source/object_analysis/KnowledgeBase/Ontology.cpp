@@ -34,6 +34,7 @@
             return all_function;
         }
 
+        // return priority of object type
 	unsigned Ontology::priority(ObjectType obj)
         {
             switch(obj){
@@ -81,12 +82,55 @@
             return 0;
         }
 
+        // return fragility of object arg
 	unsigned Ontology::robustness(ObjectType obj)
         {
-            // return ObjectType with rank ObjectType.len() - ObjectType
+            switch(obj){
+                case ObjectType::AGENT:
+                    {
+                        return 9;
+                    }
+                case ObjectType::DYNAMIC_MAMMAL:
+                    {
+                        return 2;
+                    }
+                case ObjectType::STATIC_MAMMAL:
+                    {
+                        return 2;
+                    }
+                case ObjectType::DYNAMIC_PLANT:
+                    {
+                        return 4;
+                    }
+                case ObjectType::STATIC_PLANT:
+                    {
+                        return 4;
+                    }
+                case ObjectType::DYNAMIC_INORGANIC_NATURAL:
+                    {
+                        return 3;
+                    }
+                case ObjectType::STATIC_INORGANIC_NATURAL:
+                    {
+                        return 7;
+                    }
+                case ObjectType::DYNAMIC_SYNTHETIC:
+                    {
+                        return 5;
+                    }
+                case ObjectType::STATIC_SYNTHETIC:
+                    {
+                        return 5;
+                    }
+                default:
+                    {
+                        return 0;
+                    }
+            }
             return 0;
         }
 
+        // REMOVE
         std::pair<int, int> Ontology::position(Atom constant)
         {
             return std::make_pair(0, 0);
@@ -100,9 +144,15 @@
 
 	bool Ontology::removePredicate(std::string name)
         {
-            return true;
-            //return all_predicate.end() == all_predicate.erase(find(name));
-        }
+            auto predicate_it = all_predicate.second.begin();
+            while(predicate_it != all_predicate.second.end()){
+                if(predicate_it->name == name){
+                    all_predicate.second.erase(predicate_it);
+                    return predicate_it != all_predicate.second.end();
+                }
+            }
+            return false;
+         }
 
 	std::pair<AtomType, std::set<Atom> > Ontology::getAllPredicate()
         {
@@ -129,8 +179,15 @@
 
 	bool Ontology::removeRelation(std::string name)
 	{
-		return true;	
-	}
+            auto relation_it = all_relation.second.begin();
+            while(relation_it != all_relation.second.end()){
+                if(relation_it->name == name){
+                    all_relation.second.erase(relation_it);
+                    return relation_it != all_relation.second.end();
+                }
+            }
+            return false;
+        }
 
 	std::pair<AtomType, std::set<Atom> > Ontology::getAllRelation()
 	{
@@ -177,8 +234,15 @@
 
 	bool Ontology::removeObject(std::string name)
 	{
-		return true;
-	}
+            auto object_it = all_object.second.begin();
+            while(object_it != all_object.second.end()){
+                if(object_it->name == name){
+                    all_object.second.erase(object_it);
+                    return object_it != all_object.second.end();
+                }
+            }
+            return false;
+        }
 
 	std::pair<AtomType, std::set<Atom> > Ontology::getAllObject()
 	{
