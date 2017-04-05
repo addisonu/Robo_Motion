@@ -75,11 +75,25 @@ bool InferenceEngine::substitution(std::set<std::pair<Atom, Atom> > &theta, Comp
 	return theta.size();
 }
 
-Sentence InferenceEngine::universalInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
+// return a set of sentences inferred by substituting all kb constants into the argument sentence
+std::set<Sentence> InferenceEngine::universalInstatiation(Sentence alpha)
 {
-	Sentence s;
-	return s;
-
+	std::set<Sentence> all_infer_sen;
+	for(auto sent : kb){
+		for(auto ele : sent){
+			if(ele.type == AtomType::CONSTANT){
+				Sentence tmp(alpha);
+				for(auto &tmp_ele : tmp){
+					if(tmp_ele.type == AtomType::OBJECT){
+						tmp_ele = ele;
+					}
+				}
+				all_infer_sen.insert(tmp);
+			}
+		}
+	}	
+	
+	return all_infer_sen;
 }
 
 Sentence InferenceEngine::existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)

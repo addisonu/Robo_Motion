@@ -23,7 +23,7 @@ class InferenceEngine{
         bool unify(Sentence lhs, Sentence rhs);
 		Sentence standardizeRule(Sentence rule);
 		bool substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index);
-		Sentence universalInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
+		std::set<Sentence> universalInstatiation(Sentence alpha);
 		Sentence existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
 
     private:
