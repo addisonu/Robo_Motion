@@ -38,10 +38,59 @@ std::pair<Sentence, bool> InferenceEngine::forwardChaining(std::set<Sentence> kb
 	 return s;
 }
 
-std::set<Sentence> InferenceEngine::makeDefiniteClauseKB(std::set<Sentence> kb, Atom query)
-{
-	std::set<Sentence> s;
-	return s;
+/* put a sentence in definite clause form
+ * as a disjuntion of literals of which one is postive
+ * or as an imlplication with a premise of conjunctions of positive literals and positive result
+*/
+Sentence InferenceEngine::makeDefiniteClause(Sentence alpha)
+{	
+	// check if Sentence is an implication
+	std::list<Atom>::iterator sen_it = alpha.sen.begin();
+
+	for(; sen_it != alpha.sen.end(); ++sen_it){
+		if(sen_it->type == AtomType::OPERATOR && sen_it->name == "IMPLY"){
+			if(++sen_it != alpha.sen.end()){
+				if(++sen_it != alpha.sen.end()){
+					Sentence first_part, last_part;
+					std::list<Atom> first(alpha.begin(), sen_it);
+					std::list<Atom> last(sen_it, alpha.end());
+					
+					// place iterator back to where imply operator was found
+					--sen_it;
+					--sen_it;
+					
+					// merger partial sentences and append consequent
+					first_part.sen.merge(last_part.sen);
+					Sentence definite_clause(first_part);
+					definite_clause.sen.push_back(*sen_it);
+					definite_clause.sen.push_back(*(++sen_it));
+					return definite_clause;
+				}			
+			}
+		}
+	}
+	
+	// if not an implication, convert to group of literal disjuntions with single positive term
+
+	// make last term positive
+	std::list<Atom>::reverse_iterator sen_rit = alpha.sen.rbegin();
+
+	if(sen_rit->name[0] == '-'){
+		sen_rit->name = sen_rit->name.substr(1);
+	}
+
+	// make all preceding terms negative disjunctions
+	for(; sen_rit != alpha.sen.rend(); ++sen_rit){
+		if(sen_rit->type == AtomType::OPERATOR && sen_rit->name == "AND"){
+			sen_rit->name = "OR";
+		}
+		else if(sen_rit->type == AtomType::PREDICATE || sen_rit->type == AtomType::OBJECT ||sen_rit->type == AtomType::CONSTANT){ 
+			if(sen_rit->name[0] != '-'){
+				sen_rit->name = std::string('-' + sen_rit->name);
+			}
+		}
+	}
+	return alpha;
 }
 
 bool InferenceEngine::unify(Sentence lhs, Sentence rhs)
@@ -49,10 +98,10 @@ bool InferenceEngine::unify(Sentence lhs, Sentence rhs)
 	return true;
 }
 
+// return a true if constants have been found that make the argument sentence true
 bool InferenceEngine::substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index)
 {
-	// Check argument types
-	if(alpha.arity < arg_index/*theta.first.AtomType != AtomType::OBJECT && theta.second.AtomType != AtomType::VARIABLE*/){
+	if(alpha.arity < arg_index){
 		return false;
 	}
 	// Check all sentences in knowledge base for match

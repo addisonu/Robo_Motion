@@ -19,7 +19,7 @@ class InferenceEngine{
         // MEMBER FUNCTIONS
         Sentence backChaining(std::set<Sentence> kb);
         std::pair<Sentence, bool> forwardChaining(std::set<Sentence> kb);
-        std::set<Sentence> makeDefiniteClauseKB(std::set<Sentence> kb, Atom query);
+        Sentence makeDefiniteClause(Sentence alpha);
         bool unify(Sentence lhs, Sentence rhs);
 		Sentence standardizeRule(Sentence rule);
 		bool substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index);
