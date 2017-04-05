@@ -96,10 +96,19 @@ std::set<Sentence> InferenceEngine::universalInstatiation(Sentence alpha)
 	return all_infer_sen;
 }
 
+// return a copy of the argument sentence for which the variable has been substituted by a new constant symbol
 Sentence InferenceEngine::existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha)
 {
-	Sentence s;
-	return s;
+	Atom tmp_atom(new_constant, AtomType::CONSTANT);
+	tmp_atom.incrementObjectName();
+	Sentence tmp(alpha);
+
+	for(auto &tmp_ele : tmp){
+		if(tmp_ele.type == AtomType::OBJECT){
+			tmp_ele = tmp_atom;
+		}
+	}
+	return tmp;
 }
 
 Sentence InferenceEngine::standardizeRule(Sentence rule)

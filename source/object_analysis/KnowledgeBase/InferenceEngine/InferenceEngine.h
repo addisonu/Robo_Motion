@@ -29,6 +29,7 @@ class InferenceEngine{
     private:
 		
 		std::set<Sentence> kb;
+		std::string new_constant; // holds identifier of last new constant created
 };
 #endif
 
