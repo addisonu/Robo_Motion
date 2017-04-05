@@ -7,8 +7,9 @@
 #define FOL_OPERATOR_H
 
 #include <vector>
+#include "Atom.h"
 
-class Operator{
+class Operator : public Atom{
     public:
 
         // CONSTRUCTOR
