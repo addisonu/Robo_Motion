@@ -37,6 +37,21 @@ struct Sentence{
             }
             return false;
         }
+	
+	bool operator==(Sentence rhs) const
+	{
+		if(sen.size() != rhs.sen.size()){
+			return false;
+		}	
+		auto sen_it = sen.cbegin();
+		auto rhs_sen_it = rhs.sen.cbegin();
+		for(; sen_it != sen.cend(), rhs_sen_it != rhs.sen.cend(); ++sen_it, ++rhs_sen_it){
+			if(*sen_it != *rhs_sen_it){
+				return false;
+			}
+		}
+		return true;
+	}
 
 	std::list<Atom>::iterator begin()
 	{
