@@ -96,12 +96,29 @@ Sentence InferenceEngine::makeDefiniteClause(Sentence alpha)
 // Entail senences from those in kb
 std::set<std::pair<Atom, Atom> > InferenceEngine::unify(Sentence lhs, Sentence rhs)
 {
+	std::set<std::pair<Atom, Atom> > sub_result;
+	Atom variable("var", AtomType::OBJECT);
+
 	for(auto constant : ontology.getAllConstant().second){
-		for(auto &ele : 
+		for(auto &lhs_ele : lhs){
+			if(lhs_ele.type == AtomType::OBJECT){
+				lhs_ele = constant;
+			}
+		}
+		for(auto &rhs_ele : rhs){
+			if(rhs_ele.type == AtomType::OBJECT){
+				rhs_ele = constant;
+			}
+		}
+		for(auto sen : kb){
+			if(sen == rhs || sen == lhs){
+				variable.incrementObjectName();
+				sub_result.insert(std::make_pair(variable, constant));
+			}
+		}
 	}
 
-	std::set<std::pair<Atom, Atom> > s;
-	return s;
+	return sub_result;
 }
 
 // return a true if constants have been found that make the argument sentence true
