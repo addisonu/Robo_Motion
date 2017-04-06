@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <set>
 #include "../../FOL/Sentence.h"
+#include "../Ontology.h"
 
 class InferenceEngine{
     public:
@@ -29,6 +30,7 @@ class InferenceEngine{
     private:
 		
 		std::set<Sentence> kb;
+		Ontology ontology;
 		std::string new_constant; // holds identifier of last new constant created
 };
 #endif

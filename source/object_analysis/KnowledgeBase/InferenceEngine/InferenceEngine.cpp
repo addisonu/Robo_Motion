@@ -93,7 +93,8 @@ Sentence InferenceEngine::makeDefiniteClause(Sentence alpha)
 	return alpha;
 }
 
-bool InferenceEngine::unify(Sentence lhs, Sentence rhs)
+// Entail senences from those in kb
+bool InferenceEngine::unify(Sentence alpha)
 {
 	return true;
 }
