@@ -36,6 +36,16 @@ struct Atom{
 		return name < rhs.name;
 	}
 
+	bool operator==(Atom rhs) const
+	{
+		return (name == rhs.name) && (type == rhs.type);
+	}
+
+	bool operator!=(Atom rhs) const
+	{
+		return !(*this == rhs);
+	}
+
 	void incrementObjectName()
 	{
 		// Find first digit of identifier
