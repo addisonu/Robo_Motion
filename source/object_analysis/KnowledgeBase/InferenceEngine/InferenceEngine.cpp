@@ -94,9 +94,14 @@ Sentence InferenceEngine::makeDefiniteClause(Sentence alpha)
 }
 
 // Entail senences from those in kb
-bool InferenceEngine::unify(Sentence alpha)
+std::set<std::pair<Atom, Atom> > InferenceEngine::unify(Sentence lhs, Sentence rhs)
 {
-	return true;
+	for(auto constant : ontology.getAllConstant().second){
+		for(auto &ele : 
+	}
+
+	std::set<std::pair<Atom, Atom> > s;
+	return s;
 }
 
 // return a true if constants have been found that make the argument sentence true

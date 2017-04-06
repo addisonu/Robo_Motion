@@ -21,7 +21,7 @@ class InferenceEngine{
         Sentence backChaining(std::set<Sentence> kb);
         std::pair<Sentence, bool> forwardChaining(std::set<Sentence> kb);
         Sentence makeDefiniteClause(Sentence alpha);
-        bool unify(Sentence lhs, Sentence rhs);
+        std::set<std::pair<Atom, Atom> > unify(Sentence lhs, Sentence rhs);
 		Sentence standardizeRule(Sentence rule);
 		bool substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index);
 		std::set<Sentence> universalInstatiation(Sentence alpha);
