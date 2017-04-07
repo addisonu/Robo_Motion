@@ -19,19 +19,19 @@ class InferenceEngine{
 
         // MEMBER FUNCTIONS
         Sentence backChaining(std::set<Sentence> kb);
-        std::pair<Sentence, bool> forwardChaining(std::set<Sentence> kb);
+        std::pair<Atom, Atom> forwardChaining(Sentence query);
         Sentence makeDefiniteClause(Sentence alpha);
         std::set<std::pair<Atom, Atom> > unify(Sentence lhs, Sentence rhs);
-		Sentence standardizeRule(Sentence rule);
-		bool substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index);
-		std::set<Sentence> universalInstatiation(Sentence alpha);
-		Sentence existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
+        Sentence standardizeRule(Sentence rule);
+        bool substitution(std::set<std::pair<Atom, Atom> > &theta, ComplexAtom alpha, unsigned arg_index);
+        std::set<Sentence> universalInstatiation(Sentence alpha);
+        Sentence existentialInstatiation(std::set<std::pair<std::string, Sentence> > theta, Sentence alpha);
 
     private:
 		
-		std::set<Sentence> kb;
-		Ontology ontology;
-		std::string new_constant; // holds identifier of last new constant created
+        std::set<Sentence> kb;
+        Ontology ontology;
+        std::string new_constant; // holds identifier of last new constant created
 };
 #endif
 

@@ -9,6 +9,7 @@
 #include <algorithm>
 #include "InferenceEngine.h"
 #include "../../FOL/Sentence.h"
+#include "../Ontology.h"
 
 Sentence InferenceEngine::backChaining(std::set<Sentence> kb)
 {
@@ -17,25 +18,41 @@ Sentence InferenceEngine::backChaining(std::set<Sentence> kb)
 
 }
 
-std::pair<Sentence, bool> InferenceEngine::forwardChaining(std::set<Sentence> kb)
+std::pair<Atom, Atom> InferenceEngine::forwardChaining(Sentence query)
 {
-	std::pair<Sentence, bool> s;
-	std::set<Sentence> all_entailed, new_sen;
-	// while there are new sentences entailed
-	do{
-	// for each rule in the KB	
-	for(auto sent : kb){
-		// standardize rule variables
-		// for each successful substituion of constant theta
-		//for(auto theta : /*all constants*/){
-			// add element to KB
-			// if rho and alpha unify return rho
-	// add all new to KB
-		//}		
-	
-	}
-	}while(new_sen.size() > 0);	
-	 return s;
+    bool unified = true;
+    std::pair<Atom, Atom> sub = std::make_pair(Atom("var", AtomType::OBJECT), Atom("constant", AtomType::CONSTANT));
+    std::set<Sentence> infer_set;
+    do{
+        for(auto sen : kb){
+            Sentence std_sen = standardizeRule(sen);
+            if(std_sen.sen.size() != 0){
+                auto result = unify(query, std_sen);
+                for(auto result_ele : result){
+                    auto query_it = query.end();
+                    Sentence q;
+                    q.sen.push_back(*(--query_it));
+                    std::set<std::pair<Atom, Atom> > unify_q;
+                    for(auto sen : kb){
+                        std::set<std::pair<Atom, Atom> > tmp_unify = unify(q, sen);
+                        for(auto sub : tmp_unify){
+                            unify_q.insert(sub);
+                        }
+                        if(unify_q.size() == 0){
+                            infer_set.insert(q);
+                        }
+                        else{
+                            unified = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+    }while(unified);
+
+    return sub;
 }
 
 /* put a sentence in definite clause form
