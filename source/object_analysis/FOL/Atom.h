@@ -27,7 +27,11 @@ enum class AtomType{
 struct Atom{
 
 	// CONSTRUCTOR
-	//Atom(){ }
+	Atom()
+        {
+            name = "null_name";
+            type = AtomType::NONE;
+        }
 
 	Atom(std::string name_arg, AtomType type_arg): name(name_arg), type(type_arg){ }
 
