@@ -11,11 +11,19 @@
 #include "../../FOL/Sentence.h"
 #include "../Ontology.h"
 
-Sentence InferenceEngine::backChaining(std::set<Sentence> kb)
+std::pair<Atom, Atom> InferenceEngine::backChaining(Sentence query)
 {
-	Sentence s;
-	return s;
-
+    std::pair<Atom, Atom> sub;
+    for(auto sen : kb){
+        Sentence std_sen = standardizeRule(sen);
+        auto result = unify(query, std_sen);
+        for(auto std_ele : std_sen){
+            if(result.size() == 0){
+                break;
+            }
+        }
+    }
+    return sub;
 }
 
 std::pair<Atom, Atom> InferenceEngine::forwardChaining(Sentence query)
@@ -48,7 +56,6 @@ std::pair<Atom, Atom> InferenceEngine::forwardChaining(Sentence query)
                     }
                 }
             }
-
         }
     }while(unified);
 

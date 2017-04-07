@@ -18,7 +18,7 @@ class InferenceEngine{
         // CONSTRUCTOR
 
         // MEMBER FUNCTIONS
-        Sentence backChaining(std::set<Sentence> kb);
+        std::pair<Atom, Atom> backChaining(Sentence query);
         std::pair<Atom, Atom> forwardChaining(Sentence query);
         Sentence makeDefiniteClause(Sentence alpha);
         std::set<std::pair<Atom, Atom> > unify(Sentence lhs, Sentence rhs);
