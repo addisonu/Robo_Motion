@@ -119,7 +119,7 @@ class Object : public Atom{
             return object_type;
         }
 
-        void getObjectType(ObjectType type_arg)
+        void setObjectType(ObjectType type_arg)
         {
             object_type = type_arg;
         }
@@ -129,7 +129,7 @@ class Object : public Atom{
             return priority;
         }
 
-        void getPriority(unsigned priority_arg)
+        void setPriority(unsigned priority_arg)
         {
             priority = priority_arg;
         }
@@ -139,7 +139,7 @@ class Object : public Atom{
             return path_to_object_type_file;
         }
 
-        void getPathToObjectTypeFile(std::string path_arg)
+        void setPathToObjectTypeFile(std::string path_arg)
         {
             path_to_object_type_file = path_arg;
         }
