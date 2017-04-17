@@ -1,0 +1,16 @@
+// AUTHOR: NA
+// DATE: 04/13/17
+// DESC: List of objects for which type and priority (1 - 10) is assigned
+// FILE: object_type_file.txt
+
+:name-template:object_type-NONE:priority-1.
+:name-human:object_type-DYNAMIC_MAMMAL:priority-10.
+:name-vehicle:object_type-DYNAMIC_SYNTHETIC:priority-6
+:name-cat:object_type-DYNAMIC_MAMMAL:priority-4.
+:name-tree:object_type-STATIC_PLANT:priority-4.
+:name-pibedal_robot:object_type-DYNAMIC_SYNTHETIC:priority-6.
+:name-building:object_type-STATIC_SYNTHETIC:priority-5.
+:name-train:object_type-DYNAMIC_SYNTHETIC:priority-4.
+:name-curb:object_type-STATIC_SYNTHETIC:priority-1.
+:name-road:object_type-STATIC_SYNTHETIC:priority-1.
+
