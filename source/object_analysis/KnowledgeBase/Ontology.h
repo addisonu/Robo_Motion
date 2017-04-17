@@ -10,18 +10,6 @@
 #include <iostream>
 #include "../FOL/Atom.h"
 
-enum class ObjectType{
-	AGENT = 0,
-	DYNAMIC_MAMMAL,
-	STATIC_MAMMAL,
-	DYNAMIC_PLANT,
-	STATIC_PLANT,
-	DYNAMIC_INORGANIC_NATURAL,
-	STATIC_INORGANIC_NATURAL,
-	DYNAMIC_SYNTHETIC,
-	STATIC_SYNTHETIC,
-};
-
 class Ontology{
 
 	public:
