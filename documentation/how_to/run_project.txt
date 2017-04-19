@@ -30,6 +30,9 @@ Arguments:
 
     - classifier_list
 		Text file with the path to each classifier to be loaded
+	
+	- object_type_list
+		Text file with priority and object type assignments
 
 Run Project
     The program will be compiled into an executable.
