@@ -9,13 +9,19 @@
 * command #2: g++ -std=c++11 <source_file> `pkg-config opencv --cflags --libs`
 */
 
+// Standard library headers
 #include <iostream>
 #include <cstdio>
 #include <exception>
 #include <fstream>
+
+// OpenCV headers
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+
+// Project headers
+#include "./object_analysis/FOL/Object.h"
 
 int main(int argc, char **argv)
 {
@@ -25,7 +31,8 @@ int main(int argc, char **argv)
 		|| argv[3] == nullptr || argv[3] == '\0'
 		|| argv[4] == nullptr || argv[4] == '\0'
 		|| argv[5] == nullptr || argv[5] == '\0'
-		|| argv[6] == nullptr || argv[6] == '\0'){
+		|| argv[6] == nullptr || argv[6] == '\0'
+		|| argv[7] == nullptr || argv[7] == '\0'){
             std::cerr << "The correct number of arguments were not passed.\n" << std::endl
 			<< "Arguments should be passed as:\nRoboMotion <out_file> <in_file> <kb> "
 			<< "<rule> <classifier> <classifier_list>\n" << std::endl
@@ -39,6 +46,8 @@ std::cout << "vid path: " << in_file << std::endl;// debugging
 	std::string rule(argv[4]);
 	std::string classifier_dir(argv[5]);
 	std::string classifier_list(argv[6]);
+	std::string object_type_list(argv[7]);
+
     try{
             // Load image
             //cv::Mat img;
@@ -128,10 +137,15 @@ std::cout << "Loop through classifiers" << std::endl; //debbuging
 					std::vector<cv::Rect> all_object;
 					classifier_ele.second.detectMultiScale(*frame, all_object, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
 					if(all_object.size() > 0){
+						// get object name to pass to ontology
+						classified_object_name = "";
 						classified_object_name = classifier_ele.first;
 						std::cout << "classified_object_name: " << classified_object_name << std::endl;// debugging
-						// get object name to pass to ontology
-						// LEFT OFF
+						classified_object_name = "vehicle";// debugging
+						// recommend an action
+						if(!classified_object_name.empty()){
+							Object classified_obj(classified_object_name, object_type_list);	
+						}
 						frame->release();
 						break;
 					}
@@ -141,5 +155,6 @@ std::cout << "Loop through classifiers" << std::endl; //debbuging
     catch(std::exception &e){
             std::cerr << "An unkwown error occurred. Program will now terminate." << std::endl;
     }
+
 return 0;
 }
