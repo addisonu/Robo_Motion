@@ -52,6 +52,12 @@ organic(X):- mammal(Y).
 %% Some mammals are humans
 mammal(Y):- human(Y).
 
+%% A vehicle is synthetic
+synthetic(Y):- vehicle(Y).
+
+%% A vehicle is robust 
+robust(Y):- vehicle(Y).
+
 %% Objects may have a rational course
 rationalMove(Y).
 
@@ -78,6 +84,27 @@ lowestPriority(Y):- priority(Y, 1).
 
 %% 5 is moderate priority
 moderatePriority(Y):- priority(Y, 5).
+
+%% 9 is moderate priority
+highPriority(Y):- priority(Y, 9).
+
+%% 8 is moderate priority
+highPriority(Y):- priority(Y, 8).
+
+%% 7 is moderate priority
+mediumPriority(Y):- priority(Y, 7).
+
+%% 6 is moderate priority
+mediumPriority(Y):- priority(Y, 6).
+
+%% 4 is moderate priority
+lowPriority(Y):- priority(Y, 4).
+
+%% 3 is moderate priority
+lowPriority(Y):- priority(Y, 3).
+
+%% 2 is moderate priority
+moderatePriority(Y):- priority(Y, 2).
 
 %% A human object as priority 10
 highestPriority(Y):- human(Y).
