@@ -1,2 +1,0 @@
-face|"../classification/haarcascade_frontalface_default.xml"
-vehicle|"../classification/vehicle_classifier.xml"
