@@ -25,10 +25,11 @@ Arguments:
     - rule
         Prolog file storing decision heuristics
 
-    - classifier
-        Directory containing all classifier not part of OpenCV install
+    - classifier_dir
+        Directory containing all classifiers not part of OpenCV install
 
     - classifier_list
+		Text file with the path to each classifier to be loaded
 
 Run Project
     The program will be compiled into an executable.
