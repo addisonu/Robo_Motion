@@ -329,36 +329,36 @@
 	// Always evade a moving object
 	// If the priority and height of a static object is low, walk over it
 
-	if(obj.getObjectType() != ObjectType::AGENT){
+		if(obj.getObjectType() != ObjectType::AGENT){
 
-		// priority is high
-		if(obj.getPriority() <= 10 && obj.getPriority() > 7){
-			return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
-		}
-		// priority is moderate or low
-		else if(obj.getPriority() <= 7 && obj.getPriority() > 0){
-			switch (obj.getObjectType()){
-				case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
-				{
-					return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
-				}
-				case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
-				{
-					if(canStepOver(agent_location, object_location, agent_step_size, obj_dim[2])){
-						return walkOn(agent_location, object_location);
-					}
-					else{
+			// priority is high
+			if(obj.getPriority() <= 10 && obj.getPriority() > 7){
+				return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
+			}
+			// priority is moderate or low
+			else if(obj.getPriority() <= 7 && obj.getPriority() > 0){
+				switch (obj.getObjectType()){
+					case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
+					{
 						return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
 					}
-				}
-				default:
-				{
-					return "no action returned";
+					case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
+					{
+						if(canStepOver(agent_location, object_location, agent_step_size, obj_dim[2])){
+							return walkOn(agent_location, object_location, agent_step_size);
+						}
+						else{
+							return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
+						}
+					}
+					default:
+					{
+						return "no action returned";
+					}
 				}
 			}
 		}
-	}
-					return "no action returned";
+						return "no action returned";
 	}
 
     bool Ontology::canStepOver(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_height, double step_height)
@@ -391,17 +391,35 @@
 		//return  + x0 + "," + y0 + "," + z0 + "):agent_ending_location-(" + x1 + "," + y1 + "," + z1 + ")";
 	}
 
-	std::string Ontology::walkOn(std::pair<double, double> agent_location, std::pair<double, double> object_location)
+	std::string Ontology::walkOn(std::pair<double, double> agent_location, std::pair<double, double> object_location, double agent_step_size)
 	{
-		return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
+		std::string action("action-<action>:agent_starting_location-(");
+		std::stringstream ss;
+		ss << agent_location.first << "," << agent_location.second 
+		<< "," << 0	<< "):agent_ending_location-(;"
+		<< agent_location.first << "," << agent_location.second
+		<< "," << 0 << ")";
+
+		action += ss.str();
+		//return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
+		return action;
 	}
 
 	bool Ontology::isOnXPlane(std::pair<double, double> agent_location, double agent_dim[3], std::pair<double, double> object_location, double obj_dim[3])
 	{
-		return true;
+		double A = agent_location.first - (0.5 * agent_dim[0]);
+		double B = agent_location.first + (0.5 * agent_dim[0]);
+		double C = object_location.first - (0.5 * obj_dim[0]);
+		double D = object_location.first + (0.5 * obj_dim[0]);
+		return ((C <= B && C >= A) || (D <= B && D >= A));
 	}
 
 	bool Ontology::isOnYPlane(std::pair<double, double> agent_location, double agent_dim[3], std::pair<double, double> object_location, double obj_dim[3])
 	{
-		return true;
+		double A = agent_location.second - (0.5 * agent_dim[0]);
+		double B = agent_location.second + (0.5 * agent_dim[0]);
+		double C = object_location.second - (0.5 * obj_dim[0]);
+		double D = object_location.second + (0.5 * obj_dim[0]);
+		return ((C <= B && C >= A) || (D <= B && D >= A));
+
 	}
