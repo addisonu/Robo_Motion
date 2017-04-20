@@ -57,6 +57,8 @@ class Ontology{
 	bool canStepOver(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_height, double step_height);
 	std::string evade(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_xwid, double obj_ywid);
 	std::string walkOn(std::pair<double, double> agent_location, std::pair<double, double> object_location);
+	bool isOnXPlane(std::pair<double, double> agent_location, double agent_dim[3], std::pair<double, double> object_location, double obj_dim[3]);
+ 	 bool isOnYPlane(std::pair<double, double> agent_location, double agent_dim[3], std::pair<double, double> object_location, double obj_dim[3]);
 
 	private:
 	std::pair<AtomType, std::set<Atom> > all_object;

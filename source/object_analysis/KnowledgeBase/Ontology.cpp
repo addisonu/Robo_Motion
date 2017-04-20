@@ -369,10 +369,10 @@
 	std::string Ontology::evade(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_xwid, double obj_ywid)
     {
 		std::string action("action-evade:agent_starting_location-(");
-		std::stringstream start;
+	/*	std::stringstream start;
 		start << agent_location.first << ",";// << y0 << "," << z0 << ");
-		// object is on agent y-plane
-		if(){
+		// object is on agent xy-plane
+		if((object_location.x <= (agent_location.first + agent_xwid)) && (object_location.y <= ())){
 
 			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
 		}
@@ -381,12 +381,27 @@
 		
 			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
 		}
+		else if(){
+		// object is on agent y-plane
+		
+			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
+		}
 		// object in not on agent plane
-			return action;	
+*/			return action;	
 		//return  + x0 + "," + y0 + "," + z0 + "):agent_ending_location-(" + x1 + "," + y1 + "," + z1 + ")";
 	}
 
 	std::string Ontology::walkOn(std::pair<double, double> agent_location, std::pair<double, double> object_location)
 	{
 		return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
+	}
+
+	bool Ontology::isOnXPlane(std::pair<double, double> agent_location, double agent_dim[3], std::pair<double, double> object_location, double obj_dim[3])
+	{
+		return true;
+	}
+
+	bool Ontology::isOnYPlane(std::pair<double, double> agent_location, double agent_dim[3], std::pair<double, double> object_location, double obj_dim[3])
+	{
+		return true;
 	}
