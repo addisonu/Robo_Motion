@@ -9,6 +9,7 @@
 #include <set>
 #include <iostream>
 #include "../FOL/Atom.h"
+#include "../FOL/Object.h"
 
 class Ontology{
 
@@ -22,8 +23,8 @@ class Ontology{
 	std::pair<AtomType, std::set<Atom> > getAllFunction();
 	unsigned priority(ObjectType obj);
 	unsigned robustness(ObjectType obj);
-        void setPosition(Atom object, int x_coor, int y_coor);
-        std::pair<int, int> getPosition(Atom object);
+	void setPosition(Atom object, int x_coor, int y_coor);
+	std::pair<int, int> getPosition(Atom object);
 
 	// PREDICATE
 	void addPredicate(Atom predicate);
@@ -50,6 +51,9 @@ class Ontology{
 	void addConstant(Atom constant);
 	bool removeConstant(std::string name);
 	std::pair<AtomType, std::set<Atom> > getAllConstant();
+
+	// OTHER
+	std::string recommendAction(std::pair<double, double> agent_location, std::pair<double, double> object_location, Object obj);
 
 	private:
 	std::pair<AtomType, std::set<Atom> > all_object;

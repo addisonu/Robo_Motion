@@ -320,3 +320,75 @@
 	{
 		return all_constant;
 	}
+
+	std::string recommendAction(std::pair<double, double> agent_location, std::pair<double, double> object_location, Object obj)
+	{
+	// priority is high
+	if(obj.getPriority() <= 10 && obj.getPriority() > 7){
+		switch (obj.getObjectType()){
+			case ObjectType::AGENT:
+			{
+				break;
+			}
+			case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
+			{
+				break;
+			}
+			case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
+			{
+				break;
+			}
+			default:
+			{
+
+			}
+		}
+	}
+	// priority is moderate
+	else if(obj.getPriority() <= 7 && obj.getPriority() > 3){
+		switch (obj.getObjectType()){
+			case ObjectType::AGENT:
+			{
+				break;
+			}
+			case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
+			{
+				break;
+			}
+			case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
+			{
+				break;
+			}
+			default:
+			{
+
+			}
+		}
+	}
+	// priority is low
+	else if(obj.getPriority() <= 3 && obj.getPriority() > 0){
+		switch (obj.getObjectType()){
+			case ObjectType::AGENT:
+			{
+				break;
+			}
+			case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
+			{
+				break;
+			}
+			case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
+			{
+				break;
+			}
+			default:
+			{
+
+			}
+		}
+	}
+		// switch for type of object
+			// location
+				// return string
+		return "hello";
+	}
+
