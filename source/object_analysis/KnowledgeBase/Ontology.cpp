@@ -321,74 +321,72 @@
 		return all_constant;
 	}
 
-	std::string recommendAction(std::pair<double, double> agent_location, std::pair<double, double> object_location, Object obj)
+// action format:
+// action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)
+	std::string Ontology::recommendAction(std::pair<double, double> agent_location, double agent_step_size, std::pair<double, double> object_location, double obj_dim[3], Object obj)
 	{
-	// priority is high
-	if(obj.getPriority() <= 10 && obj.getPriority() > 7){
-		switch (obj.getObjectType()){
-			case ObjectType::AGENT:
-			{
-				break;
-			}
-			case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
-			{
-				break;
-			}
-			case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
-			{
-				break;
-			}
-			default:
-			{
+	// Do nothing if type is agent
+	// Always evade a moving object
+	// If the priority and height of a static object is low, walk over it
 
+	if(obj.getObjectType() != ObjectType::AGENT){
+
+		// priority is high
+		if(obj.getPriority() <= 10 && obj.getPriority() > 7){
+			return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
+		}
+		// priority is moderate or low
+		else if(obj.getPriority() <= 7 && obj.getPriority() > 0){
+			switch (obj.getObjectType()){
+				case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
+				{
+					return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
+				}
+				case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
+				{
+					if(canStepOver(agent_location, object_location, agent_step_size, obj_dim[2])){
+						return walkOn(agent_location, object_location);
+					}
+					else{
+						return evade(agent_location, object_location, obj_dim[0], obj_dim[1]);
+					}
+				}
+				default:
+				{
+					return "no action returned";
+				}
 			}
 		}
 	}
-	// priority is moderate
-	else if(obj.getPriority() <= 7 && obj.getPriority() > 3){
-		switch (obj.getObjectType()){
-			case ObjectType::AGENT:
-			{
-				break;
-			}
-			case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
-			{
-				break;
-			}
-			case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
-			{
-				break;
-			}
-			default:
-			{
+					return "no action returned";
+	}
 
-			}
+    bool Ontology::canStepOver(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_height, double step_height)
+    {
+		return obj_height < step_height;
+	}
+
+	std::string Ontology::evade(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_xwid, double obj_ywid)
+    {
+		std::string action("action-evade:agent_starting_location-(");
+		std::stringstream start;
+		start << agent_location.first << ",";// << y0 << "," << z0 << ");
+		// object is on agent y-plane
+		if(){
+
+			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
 		}
-	}
-	// priority is low
-	else if(obj.getPriority() <= 3 && obj.getPriority() > 0){
-		switch (obj.getObjectType()){
-			case ObjectType::AGENT:
-			{
-				break;
-			}
-			case ObjectType::DYNAMIC_MAMMAL: case ObjectType::DYNAMIC_INORGANIC_NATURAL: case ObjectType::DYNAMIC_SYNTHETIC: case ObjectType::DYNAMIC_PLANT:
-			{
-				break;
-			}
-			case ObjectType::STATIC_MAMMAL: case ObjectType::STATIC_PLANT: case ObjectType::STATIC_SYNTHETIC: case ObjectType::STATIC_INORGANIC_NATURAL:
-			{
-				break;
-			}
-			default:
-			{
-
-			}
+		else if(){
+		// object is on agent x-plane
+		
+			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
 		}
-	}
-		// switch for type of object
-			// location
-				// return string
-		return "hello";
+		// object in not on agent plane
+			return action;	
+		//return  + x0 + "," + y0 + "," + z0 + "):agent_ending_location-(" + x1 + "," + y1 + "," + z1 + ")";
 	}
 
+	std::string Ontology::walkOn(std::pair<double, double> agent_location, std::pair<double, double> object_location)
+	{
+		return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
+	}

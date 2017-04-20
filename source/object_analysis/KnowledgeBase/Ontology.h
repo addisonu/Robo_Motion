@@ -53,7 +53,10 @@ class Ontology{
 	std::pair<AtomType, std::set<Atom> > getAllConstant();
 
 	// OTHER
-	std::string recommendAction(std::pair<double, double> agent_location, std::pair<double, double> object_location, Object obj);
+	std::string recommendAction(std::pair<double, double> agent_location, double agent_step_size, std::pair<double, double> object_location, double obj_dim[3], Object obj);
+	bool canStepOver(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_height, double step_height);
+	std::string evade(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_xwid, double obj_ywid);
+	std::string walkOn(std::pair<double, double> agent_location, std::pair<double, double> object_location);
 
 	private:
 	std::pair<AtomType, std::set<Atom> > all_object;
