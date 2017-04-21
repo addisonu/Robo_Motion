@@ -6,7 +6,10 @@
 /* 
 * NOTE: to compile program: 
 * command #1: export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+*
 * command #2: g++ -std=c++11 <source_file> `pkg-config opencv --cflags --libs`
+*
+* command #3: ./a.out a ../resource/1d.mp4 c d ./object_id/classification ../resource/all_classifier.txt ./object_analysis/FOL/object_type_file.txt
 */
 
 // Standard library headers
@@ -22,6 +25,7 @@
 
 // Project headers
 #include "./object_analysis/FOL/Object.h"
+#include "./object_analysis/KnowledgeBase/Ontology.h"
 
 int main(int argc, char **argv)
 {
@@ -136,15 +140,29 @@ std::cout << "New frame read" << std::endl; //debbuging
 std::cout << "Loop through classifiers" << std::endl; //debbuging
 					std::vector<cv::Rect> all_object;
 					classifier_ele.second.detectMultiScale(*frame, all_object, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30, 30));
-					if(all_object.size() > 0){
+					//if(all_object.size() > 0){
+					if(all_object.size() >= 0){// testing, remove
 						// get object name to pass to ontology
 						classified_object_name = "";
-						classified_object_name = classifier_ele.first;
+						//classified_object_name = classifier_ele.first; // uncomment after testing
+						classified_object_name = "vehicle";
 						std::cout << "classified_object_name: " << classified_object_name << std::endl;// debugging
 						classified_object_name = "vehicle";// debugging
 						// recommend an action
 						if(!classified_object_name.empty()){
 							Object classified_obj(classified_object_name, object_type_list);	
+							classified_obj.setObjectType(ObjectType::DYNAMIC_SYNTHETIC);
+std::cout << "obj_type: " << static_cast<const int>(classified_obj.getObjectType()) << std::endl;// debugging
+							Ontology ontology;
+							
+							std::pair<double, double> agent_location(std::make_pair(frame->size().width, 0));
+							double agent_step_size(10); // magic
+							std::pair<double, double> object_location(std::make_pair(3, 5)); // magic 
+							double obj_dim[3] = {4, 3, 5}; // magic
+							std::cout << ontology.recommendAction(agent_location, agent_step_size, object_location, obj_dim, classified_obj) << std::endl;
+
+							// write action to file
+							
 						}
 						frame->release();
 						break;
