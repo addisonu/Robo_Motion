@@ -9,7 +9,7 @@
 *
 * command #2: g++ -std=c++11 <source_file> `pkg-config opencv --cflags --libs`
 *
-* command #3: ./a.out a ../resource/1d.mp4 c d ./object_id/classification ../resource/all_classifier.txt ./object_analysis/FOL/object_type_file.txt
+* command #3: ./a.out a ../resource/1d.mp4 c d ./object_id/classification ../resource/all_classifier.txt ./object_analysis/FOL/object_type_file.txt -o RoboMotion
 */
 
 // Standard library headers
@@ -159,10 +159,13 @@ std::cout << "obj_type: " << static_cast<const int>(classified_obj.getObjectType
 							double agent_step_size(10); // magic
 							std::pair<double, double> object_location(std::make_pair(3, 5)); // magic 
 							double obj_dim[3] = {4, 3, 5}; // magic
-							std::cout << ontology.recommendAction(agent_location, agent_step_size, object_location, obj_dim, classified_obj) << std::endl;
+							std::string recommended_action = ontology.recommendAction(agent_location, agent_step_size, object_location, obj_dim, classified_obj);
+							std::cout << recommended_action << std::endl;
 
 							// write action to file
-							
+							std::ofstream action_out(out_file, std::fstream::app);	
+							action_out << recommended_action << std::endl;
+							action_out.close();
 						}
 						frame->release();
 						break;
