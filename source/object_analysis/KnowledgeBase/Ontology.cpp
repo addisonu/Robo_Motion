@@ -358,7 +358,7 @@
 				}
 			}
 		}
-						return "no action returned";
+		return "no action returned";
 	}
 
     bool Ontology::canStepOver(std::pair<double, double> agent_location, std::pair<double, double> object_location, double obj_height, double step_height)
@@ -375,7 +375,7 @@
 		std::string action("action-evade:agent_starting_location-(");
 		std::stringstream ss;
 		ss << object_location.first << "," << object_location.second
-			<< 0 << "):agent_ending_location-(;";
+			<< "," <<  0 << "):agent_ending_location-(";
 
 		if(isOnXPlane(agent_location, agent_dim, object_location, obj_dim) && isOnYPlane(agent_location, agent_dim, object_location, obj_dim)){
 			if(object_location.first < agent_location.first){
@@ -403,10 +403,6 @@
 				}
 			}			
 		}
-
-
-
-
 		else if(isOnXPlane(agent_location, agent_dim, object_location, obj_dim)){
 			ss << agent_location.first << ","
 				<< (agent_location.second + agent_step) << "," << 0 << ")";
@@ -421,7 +417,10 @@
 					<< (agent_location.second + agent_step) << "," << 0 << ")";
 			}
 		}
-
+		else{
+			ss << agent_location.first << ","
+				<< (agent_location.second + agent_step) << "," << 0 << ")";
+		}
 
 /*	else if(){
 		// object is on agent x-plane
