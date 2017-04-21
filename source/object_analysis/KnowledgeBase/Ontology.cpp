@@ -374,12 +374,11 @@
 
 		std::string action("action-evade:agent_starting_location-(");
 		std::stringstream ss;
-			ss << object_location.first << "," << object_location.second
+		ss << object_location.first << "," << object_location.second
 			<< 0 << "):agent_ending_location-(;";
 
-
 		if(isOnXPlane(agent_location, agent_dim, object_location, obj_dim) && isOnYPlane(agent_location, agent_dim, object_location, obj_dim)){
-						if(object_location.first < agent_location.first){
+			if(object_location.first < agent_location.first){
 				// object is left/behing agent
 				if(object_location.second < agent_location.second){
 					ss << agent_location.first << ","
@@ -403,11 +402,28 @@
 						<< (agent_location.second + agent_step) << "," << 0 << ")";
 				}
 			}			
-
-
-			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
 		}
-	/*	else if(){
+
+
+
+
+		else if(isOnXPlane(agent_location, agent_dim, object_location, obj_dim)){
+			ss << agent_location.first << ","
+				<< (agent_location.second + agent_step) << "," << 0 << ")";
+		}
+		else if(isOnYPlane(agent_location, agent_dim, object_location, obj_dim)){
+			if(object_location.second < agent_location.second){
+				ss << agent_location.first << ","
+					<< (agent_location.second + agent_step) << "," << 0 << ")";
+			}
+			else if(object_location.second > agent_location.second){
+				ss << (agent_location.first - agent_step) << ","
+					<< (agent_location.second + agent_step) << "," << 0 << ")";
+			}
+		}
+
+
+/*	else if(){
 		// object is on agent x-plane
 		
 			return "action-<action>:agent_starting_location-(x0,y0,z0):agent_ending_location-(x1,y1,z1)";
