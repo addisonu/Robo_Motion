@@ -38,4 +38,4 @@ Run Project
     The program will be compiled into an executable.
     Command to run:
 
-    Robo_Motion -out_file<path_to_action_file> -in_file<path_to_camera_feed> -kb<path_to_kb> -rule<path_to_heuristics> -classifier<path_to_classifier_dir> -classifier_path<path_to_classifier_file_listing>
+    Robo_Motion <path_to_action_file> <path_to_camera_feed> <path_to_kb> <path_to_heuristics> <path_to_classifier_dir> <path_to_classifier_file_listing>
